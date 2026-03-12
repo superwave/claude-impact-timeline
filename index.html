@@ -357,10 +357,10 @@
   @media (max-width: 768px) {
     .toc { display: none; }
     .hero { padding-top: 40px; }
-    .timeline-container::before { left: 24px; }
-    .event, .event:nth-child(even) { flex-direction: row !important; padding-left: 48px; }
+    .timeline-container::before { left: 24px; transform: none; }
+    .event, .event:nth-child(even) { flex-direction: row !important; padding-left: 52px; }
     .event .card { width: 100%; }
-    .event .dot { left: 24px; }
+    .event .dot { left: 17px; transform: none; }
     .event .connector { display: none; }
     .hero h1 { font-size: 1.6rem; }
     .hero .stat-row { gap: 20px; }
@@ -368,7 +368,7 @@
     .bar-label { width: 130px; font-size: 0.68rem; }
     .sector-grid { grid-template-columns: 1fr; }
     .prediction-grid { grid-template-columns: 1fr; }
-    .phase-label { top: 0; position: sticky; }
+    .phase-label { top: 0; z-index: 10; }
   }
 </style>
 </head>
