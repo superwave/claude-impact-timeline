@@ -281,6 +281,68 @@
   .sector-card .sector-stats { font-size: 0.78rem; color: #999; line-height: 1.7; }
   .sector-card .sector-highlight { color: #ff6b6b; font-weight: 700; font-size: 1.1rem; }
 
+  /* Prediction Radar */
+  .prediction-section {
+    max-width: 960px;
+    margin: 0 auto 60px;
+    padding: 0 24px;
+  }
+  .prediction-section .phase-label h2 { color: #c084fc; }
+  .prediction-section .phase-label.is-stuck { border-color: rgba(192,132,252,0.18); }
+  .prediction-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .prediction-card {
+    background: #14141c;
+    border: 1px solid #2a2240;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .prediction-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+  .prediction-card.heat-5::before { background: linear-gradient(90deg, #ff2222, #ff4444); }
+  .prediction-card.heat-4::before { background: linear-gradient(90deg, #ff6633, #ff8844); }
+  .prediction-card.heat-3::before { background: linear-gradient(90deg, #ffaa33, #ffcc44); }
+  .prediction-card.heat-2::before { background: linear-gradient(90deg, #44aaff, #66ccff); }
+  .prediction-card h4 { font-size: 0.85rem; font-weight: 700; color: #e0d0ff; margin-bottom: 6px; }
+  .prediction-card .heat-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .heat-5 .heat-badge { background: rgba(255,34,34,0.15); color: #ff5555; }
+  .heat-4 .heat-badge { background: rgba(255,102,51,0.15); color: #ff8844; }
+  .heat-3 .heat-badge { background: rgba(255,170,51,0.15); color: #ffcc44; }
+  .heat-2 .heat-badge { background: rgba(68,170,255,0.15); color: #66ccff; }
+  .prediction-card .pred-detail { font-size: 0.78rem; color: #999; line-height: 1.7; }
+  .prediction-card .pred-detail strong { color: #ccc; font-weight: 600; }
+  .prediction-card .pred-targets { margin-top: 8px; font-size: 0.72rem; color: #777; }
+  .prediction-card .pred-trigger { margin-top: 6px; font-size: 0.72rem; color: #c084fc; font-style: italic; }
+  .prediction-note {
+    max-width: 960px;
+    margin: 20px auto 0;
+    padding: 16px 24px;
+    font-size: 0.72rem;
+    color: #666;
+    border: 1px dashed #333;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 1.6;
+  }
+
   .footer {
     text-align: center;
     padding: 40px 24px;
@@ -305,6 +367,7 @@
     .hero .stat .number { font-size: 1.4rem; }
     .bar-label { width: 130px; font-size: 0.68rem; }
     .sector-grid { grid-template-columns: 1fr; }
+    .prediction-grid { grid-template-columns: 1fr; }
     .phase-label { top: 0; position: sticky; }
   }
 </style>
@@ -325,6 +388,7 @@
   <a href="#stabilize">穩定化</a>
   <a href="#phase5">Phase 5 微軟</a>
   <a href="#chart">衝擊圖表</a>
+  <a href="#radar" style="color:#c084fc;">預測雷達</a>
 </nav>
 
 <div class="hero">
@@ -343,7 +407,7 @@
       <div class="label">重大衝擊事件</div>
     </div>
     <div class="stat">
-      <div class="number">7 個</div>
+      <div class="number">8 個</div>
       <div class="label">受衝擊 / 預警產業</div>
     </div>
     <div class="stat">
@@ -929,6 +993,113 @@
   </div>
 </div>
 
+<!-- =========================================== -->
+<!-- PREDICTION RADAR -->
+<!-- =========================================== -->
+<div class="prediction-section" id="radar">
+  <div class="phase-label">
+    <h2>預測雷達 — 下一波衝擊候選產業</h2>
+    <p>根據 Anthropic 產品路線圖、已公開合作信號、和 Claude Marketplace 擴張方向推估</p>
+  </div>
+
+  <div class="prediction-grid">
+
+    <div class="prediction-card heat-5">
+      <h4>HR Tech 人力資源科技</h4>
+      <div class="heat-badge">衝擊熱度 ★★★★★</div>
+      <div class="pred-detail">
+        <strong>已知信號：</strong>2/24 Enterprise Agents 發表會明確推出 HR 部門 agent template，Bloomberg 報導標題直指 HR 領域。<br>
+        <strong>核心威脅：</strong>招募篩選、薪酬分析、員工 onboarding 全面自動化，中階 HR 軟體價值被壓縮。
+      </div>
+      <div class="pred-targets">潛在標的：Paycom · Paylocity · Ceridian · Cornerstone OnDemand</div>
+      <div class="pred-trigger">觸發條件：大型企業公開宣布以 Claude 取代 HR 流程</div>
+    </div>
+
+    <div class="prediction-card heat-5">
+      <h4>旅遊中介 Travel OTA</h4>
+      <div class="heat-badge">衝擊熱度 ★★★★★</div>
+      <div class="pred-detail">
+        <strong>已知信號：</strong>Skift 專文〈The Claude Effect Is Coming for Travel〉正式點名旅遊業為下一目標。<br>
+        <strong>核心威脅：</strong>AI agent 直接處理行程規劃、比價、訂票、報銷，OTA 中介價值歸零。
+      </div>
+      <div class="pred-targets">潛在標的：Booking (USD $1,500 億市值) · Expedia · Amadeus · Sabre · Travelport</div>
+      <div class="pred-trigger">觸發條件：Claude Travel Plugin 或航空/旅館直連 API 推出</div>
+    </div>
+
+    <div class="prediction-card heat-4">
+      <h4>Investment Banking 投資銀行工具</h4>
+      <div class="heat-badge">衝擊熱度 ★★★★</div>
+      <div class="pred-detail">
+        <strong>已知信號：</strong>Bloomberg 報導 Anthropic 推出 equity research、PE、wealth management plugin template。NYSE 已採用 Claude。<br>
+        <strong>核心威脅：</strong>盡職調查、財務建模、研究報告撰寫自動化，Junior Analyst 需求驟降。
+      </div>
+      <div class="pred-targets">潛在標的：FactSet（已跌 10.5%）· LSEG/Refinitiv · MSCI · S&P Global</div>
+      <div class="pred-trigger">觸發條件：大型投行公開採用 Claude 取代初階分析工作</div>
+    </div>
+
+    <div class="prediction-card heat-4">
+      <h4>設計工具 Design Tools</h4>
+      <div class="heat-badge">衝擊熱度 ★★★★</div>
+      <div class="pred-detail">
+        <strong>已知信號：</strong>Enterprise Agents 明確列出 Design Department agent。Claude 已能產生 HTML/CSS/SVG、操作瀏覽器。<br>
+        <strong>核心威脅：</strong>UI 設計自動生成、設計稿到程式碼的完全自動化，Design-to-Code 中間層消失。
+      </div>
+      <div class="pred-targets">潛在標的：Figma（籌備 IPO 中）· Canva · Adobe（Creative Cloud 營收段）</div>
+      <div class="pred-trigger">觸發條件：Claude Design Plugin 能直接輸出 Figma-quality UI</div>
+    </div>
+
+    <div class="prediction-card heat-3">
+      <h4>會計 / 審計 Accounting</h4>
+      <div class="heat-badge">衝擊熱度 ★★★</div>
+      <div class="pred-detail">
+        <strong>已知信號：</strong>PwC 已與 Anthropic 合作部署 Enterprise AI Agents。Claude Finance Plugin 可做 journal entry、reconciliation、variance analysis。<br>
+        <strong>核心威脅：</strong>月結流程自動化、審計抽樣與測試自動化，會計人力需求結構性縮減。
+      </div>
+      <div class="pred-targets">潛在標的：Wolters Kluwer · Intuit（已跌 33%）· Sage Group · BlackLine</div>
+      <div class="pred-trigger">觸發條件：四大會計師事務所公開以 Claude 取代大量初階審計工作</div>
+    </div>
+
+    <div class="prediction-card heat-3">
+      <h4>教育科技 EdTech</h4>
+      <div class="heat-badge">衝擊熱度 ★★★</div>
+      <div class="pred-detail">
+        <strong>已知信號：</strong>Chegg 已因 AI 衝擊崩跌 90%+（主要歸因於 ChatGPT）。Claude 的推理能力在教學場景有天然優勢。<br>
+        <strong>核心威脅：</strong>個人化 AI 家教取代線上課程平台的標準化內容，知識付費模式被解構。
+      </div>
+      <div class="pred-targets">潛在標的：Coursera · Duolingo · Pearson · 2U · Udemy</div>
+      <div class="pred-trigger">觸發條件：Claude Tutor Agent 或 Education Plugin 推出</div>
+    </div>
+
+    <div class="prediction-card heat-2">
+      <h4>Claude 5 — 全面再衝擊</h4>
+      <div class="heat-badge">核武級事件</div>
+      <div class="pred-detail">
+        <strong>已知信號：</strong>Vertex AI 洩漏 claude-sonnet-5@20260203 model string。SWE-bench 達 80.9%。定價預計比 Opus 便宜 50%。<br>
+        <strong>核心威脅：</strong>每次 model upgrade 讓所有現有 plugin 和 agent 能力跳一個台階。上一輪受傷的產業將面臨二次衝擊。
+      </div>
+      <div class="pred-targets">預估時間：2026 Q2-Q3（5-9 月）</div>
+      <div class="pred-trigger">觸發條件：Claude 5 正式發佈 → 全產業重新定價</div>
+    </div>
+
+    <div class="prediction-card heat-2">
+      <h4>Claude Marketplace — 平台化野心</h4>
+      <div class="heat-badge">結構性威脅</div>
+      <div class="pred-detail">
+        <strong>已知信號：</strong>3/6 發佈 Claude Marketplace，初期合作夥伴含 Snowflake、GitLab、Harvey、Replit、Rogo、Lovable。<br>
+        <strong>核心威脅：</strong>Anthropic 從「AI 工具」升級為「企業軟體分銷平台」，直接挑戰 Salesforce AppExchange 與 AWS Marketplace。衝擊範圍將指數級擴大。
+      </div>
+      <div class="pred-targets">影響對象：所有依賴 App Store / Marketplace 模式的 SaaS 平台</div>
+      <div class="pred-trigger">觸發條件：Marketplace 開放 public access 且 plugin 數量突破 100</div>
+    </div>
+
+  </div>
+
+  <div class="prediction-note">
+    本區段為推測性分析，基於公開產品路線圖、媒體報導、已知合作關係推演，不構成投資建議。<br>
+    「衝擊熱度」反映信號強度與時間鄰近性，非股價預測。實際影響受監管環境、企業護城河、市場情緒等多重因素左右。
+  </div>
+</div>
+
 <div class="footer">
   <p>
     資料來源：
@@ -939,7 +1110,10 @@
     <a href="https://seekingalpha.com/news/4554814-cybersecurity-stocks-fall-after-anthropic-unveils-claude-code-security">Seeking Alpha</a> ·
     <a href="https://abcnews.com/Business/new-ai-tool-hammered-software-stocks-week/story?id=129845251">ABC News</a> ·
     <a href="https://venturebeat.com/security/anthropic-claude-code-security-reasoning-vulnerability-hunting">VentureBeat</a> ·
-    <a href="https://www.businesstoday.in/technology/news/story/explained-why-anthropics-new-ai-tool-is-spooking-indias-it-services-industry-514521-2026-02-04">BusinessToday</a>
+    <a href="https://www.businesstoday.in/technology/news/story/explained-why-anthropics-new-ai-tool-is-spooking-indias-it-services-industry-514521-2026-02-04">BusinessToday</a> ·
+    <a href="https://www.bloomberg.com/news/articles/2026-02-24/anthropic-links-ai-agent-with-tools-for-investment-banking-hr">Bloomberg (Enterprise Agents)</a> ·
+    <a href="https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-expands-claude-cover-human-resources-investment-banking/">PYMNTS</a> ·
+    <a href="https://time.com/article/2026/03/11/anthropic-claude-disruptive-company-pentagon/">TIME</a>
   </p>
   <p style="margin-top:6px;">圖表僅呈現公開報導中與 Anthropic 發佈事件直接相關的股價變動，不構成投資建議。部分分析師（如 Motley Fool、Wedbush）認為市場反應過度。</p>
   <p style="margin-top:8px; color:#444;">Wayne @ Aotter · 2026.03.12</p>

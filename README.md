@@ -10,7 +10,7 @@
 
 ```
 claude-impact-timeline/
-├── anthropic-impact-timeline.html   ← 唯一的產出檔（自包含，無外部依賴）
+├── index.html                       ← 唯一的產出檔（自包含，無外部依賴）
 ├── README.md                        ← 本檔案
 └── .claude/                         ← Claude 專案設定
 ```
@@ -57,6 +57,18 @@ claude-impact-timeline/
 ### 衝擊幅度長條圖
 
 14 條數據，每條包含：代表性個股、最大跌幅百分比、時間範圍註記。
+
+### 預測雷達（獨立 section，不屬於任何 Phase）
+
+8 張預測卡片，各有衝擊熱度評級（★ 1-5），包含：
+1. **HR Tech**（★★★★★）— Paycom、Paylocity、Ceridian
+2. **Travel OTA**（★★★★★）— Booking、Expedia、Amadeus、Sabre
+3. **Investment Banking**（★★★★）— FactSet、LSEG、MSCI
+4. **Design Tools**（★★★★）— Figma、Canva、Adobe
+5. **Accounting**（★★★）— Wolters Kluwer、Sage、BlackLine
+6. **EdTech**（★★★）— Coursera、Duolingo、Pearson
+7. **Claude 5 全面再衝擊**（核武級）— 預估 2026 Q2-Q3
+8. **Claude Marketplace 平台化**（結構性威脅）— 已於 3/6 發佈
 
 ## 如何新增事件
 
