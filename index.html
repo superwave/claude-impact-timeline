@@ -92,9 +92,9 @@
 
   /* Timeline */
   .timeline-container {
-    max-width: 960px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 48px 24px 40px;
+    padding: 48px 16px 40px;
     position: relative;
   }
   .timeline-container::before {
@@ -130,6 +130,42 @@
   .dot.impact { background: #ff4444; box-shadow: 0 0 20px rgba(255, 68, 68, 0.5); }
   .dot.partner { background: #4488ff; box-shadow: 0 0 20px rgba(68, 136, 255, 0.4); }
   .dot.recovery { background: #44cc88; box-shadow: 0 0 20px rgba(68, 204, 136, 0.4); }
+
+  /* Anthropic Official Source dot */
+  .dot.anthropic-official {
+    background: #d4622b;
+    width: 20px; height: 20px;
+    box-shadow: 0 0 16px rgba(212, 98, 43, 0.6);
+    animation: pulse-official 2.5s ease-in-out infinite;
+  }
+  .dot.anthropic-official::after {
+    content: '';
+    position: absolute;
+    top: -4px; left: -4px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid rgba(240, 160, 96, 0.5);
+    box-sizing: border-box;
+  }
+  @keyframes pulse-official {
+    0%, 100% { box-shadow: 0 0 16px rgba(212, 98, 43, 0.6); }
+    50% { box-shadow: 0 0 28px rgba(240, 160, 96, 0.8); }
+  }
+
+  /* Official badge on cards */
+  .official-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, rgba(212,98,43,0.25), rgba(240,160,96,0.18));
+    color: #f0a060;
+    border: 1px solid rgba(212,98,43,0.35);
+    margin-left: 8px;
+    vertical-align: middle;
+  }
 
   .event .card {
     width: calc(50% - 40px);
@@ -246,7 +282,7 @@
   .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
 
   /* Summary bar */
-  .summary-bar { max-width: 960px; margin: 0 auto 60px; padding: 0 24px; }
+  .summary-bar { max-width: 1200px; margin: 0 auto 60px; padding: 0 16px; }
   .bar-chart { display: flex; flex-direction: column; gap: 10px; }
   .bar-row { display: flex; align-items: center; gap: 12px; }
   .bar-label { width: 220px; font-size: 0.75rem; color: #999; text-align: right; flex-shrink: 0; }
@@ -264,7 +300,7 @@
 
   /* Sector summary */
   .sector-grid {
-    max-width: 960px;
+    max-width: 1200px;
     margin: 0 auto 60px;
     padding: 0 24px;
     display: grid;
@@ -283,7 +319,7 @@
 
   /* Prediction Radar */
   .prediction-section {
-    max-width: 960px;
+    max-width: 1200px;
     margin: 0 auto 60px;
     padding: 0 24px;
   }
@@ -332,7 +368,7 @@
   .prediction-card .pred-targets { margin-top: 8px; font-size: 0.72rem; color: #777; }
   .prediction-card .pred-trigger { margin-top: 6px; font-size: 0.72rem; color: #c084fc; font-style: italic; }
   .prediction-note {
-    max-width: 960px;
+    max-width: 1200px;
     margin: 20px auto 0;
     padding: 16px 24px;
     font-size: 0.72rem;
@@ -341,6 +377,119 @@
     border-radius: 10px;
     text-align: center;
     line-height: 1.6;
+  }
+
+  /* Bar chart: hyperlinks + info tooltips */
+  .bar-label a {
+    color: #bbb;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(240,160,96,0.4);
+    transition: color 0.2s;
+  }
+  .bar-label a:hover { color: #f0a060; }
+  .info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px; height: 15px;
+    font-size: 0.6rem;
+    color: #777;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid #333;
+    border-radius: 50%;
+    cursor: help;
+    position: relative;
+    vertical-align: middle;
+    margin-left: 4px;
+    font-style: normal;
+  }
+  .info-icon .tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    padding: 8px 10px;
+    background: #1e1e2a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    font-size: 0.68rem;
+    color: #ccc;
+    line-height: 1.5;
+    z-index: 20;
+    pointer-events: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    text-align: left;
+    white-space: normal;
+    word-break: normal;
+  }
+  .info-icon .tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #333;
+  }
+  .info-icon:hover .tooltip { display: block; }
+
+  /* Stock price chart */
+  .stock-chart-section {
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    padding: 0 16px;
+  }
+  .stock-chart-wrap {
+    background: #111118;
+    border: 1px solid #222;
+    border-radius: 14px;
+    padding: 24px;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stock-chart-wrap svg { width: 100%; height: auto; display: block; }
+  .chart-legend-row {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .chart-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: #999;
+  }
+  .chart-legend-swatch {
+    width: 24px; height: 3px;
+    border-radius: 2px;
+  }
+  .chart-tooltip {
+    position: absolute;
+    display: none;
+    background: rgba(20,20,30,0.95);
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.72rem;
+    color: #ddd;
+    line-height: 1.6;
+    pointer-events: none;
+    z-index: 30;
+    min-width: 160px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  }
+  .chart-disclaimer {
+    font-size: 0.65rem;
+    color: #555;
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.5;
   }
 
   .footer {
@@ -367,6 +516,11 @@
     .hero .stat-row { gap: 20px; }
     .hero .stat .number { font-size: 1.4rem; }
     .bar-label { width: 130px; font-size: 0.68rem; }
+    .info-icon .tooltip { width: 180px; left: auto; right: -10px; transform: none; }
+    .info-icon .tooltip::after { left: auto; right: 14px; transform: none; }
+    .dot.anthropic-official { width: 18px; height: 18px; }
+    .dot.anthropic-official::after { width: 26px; height: 26px; top: -4px; left: -4px; }
+    .stock-chart-wrap { padding: 12px; }
     .sector-grid { grid-template-columns: 1fr; }
     .prediction-grid { grid-template-columns: 1fr; }
     .phase-label { top: 0; z-index: 10; }
@@ -390,6 +544,7 @@
   <a href="#relief" style="color:#6be8a8;">合作反彈</a>
   <a href="#phase5">Phase 5 微軟</a>
   <a href="#chart">衝擊圖表</a>
+  <a href="#stockchart">股價走勢</a>
   <a href="#radar" style="color:#c084fc;">預測雷達</a>
 </nav>
 
@@ -421,6 +576,7 @@
 
 <div class="legend">
   <div class="legend-item"><div class="legend-dot" style="background:#d4622b"></div> Anthropic 發佈</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#d4622b; width:13px; height:13px; box-shadow: 0 0 8px rgba(240,160,96,0.6); border: 1.5px solid rgba(240,160,96,0.5);"></div> Anthropic 官方來源</div>
   <div class="legend-item"><div class="legend-dot" style="background:#ff4444"></div> 市場衝擊</div>
   <div class="legend-item"><div class="legend-dot" style="background:#4488ff"></div> 企業合作</div>
   <div class="legend-item"><div class="legend-dot" style="background:#44cc88"></div> 穩定化 / 反彈</div>
@@ -437,10 +593,10 @@
   </div>
 
   <div class="event">
-    <div class="dot release"></div>
+    <div class="dot anthropic-official"></div>
     <div class="card">
       <div class="connector"></div>
-      <div class="date-badge release-badge">2025 年 2 月</div>
+      <div class="date-badge release-badge">2025 年 2 月</div><span class="official-badge">Anthropic 官方</span>
       <h3>Claude Code 首次發佈</h3>
       <div class="description">以命令列工具形式推出 agentic coding 能力，開發者可直接在 terminal 中委派程式碼任務給 Claude。這是後續所有程式碼相關衝擊的技術起點。當時市場尚未意識到這項工具的產業威力。</div>
       <div class="source-link">來源：<a href="https://www.anthropic.com/news/claude-3-7-sonnet" target="_blank">Anthropic 官方</a></div>
@@ -448,10 +604,10 @@
   </div>
 
   <div class="event">
-    <div class="dot release"></div>
+    <div class="dot anthropic-official"></div>
     <div class="card">
       <div class="connector"></div>
-      <div class="date-badge release-badge">2025 年 5 月</div>
+      <div class="date-badge release-badge">2025 年 5 月</div><span class="official-badge">Anthropic 官方</span>
       <h3>Claude Opus 4 & Sonnet 4 — Claude Code GA</h3>
       <div class="description">Claude 4 系列模型正式推出，大幅強化程式碼能力與自主執行任務的持久度。Claude Code 同時正式 GA（一般可用），開發者社群快速採用。</div>
       <div class="source-link">來源：<a href="https://www.anthropic.com/news/claude-4" target="_blank">Anthropic 官方</a>, <a href="https://www.cnbc.com/2025/05/22/claude-4-opus-sonnet-anthropic.html" target="_blank">CNBC</a></div>
@@ -459,10 +615,10 @@
   </div>
 
   <div class="event">
-    <div class="dot release"></div>
+    <div class="dot anthropic-official"></div>
     <div class="card">
       <div class="connector"></div>
-      <div class="date-badge release-badge">2025 年 8 月</div>
+      <div class="date-badge release-badge">2025 年 8 月</div><span class="official-badge">Anthropic 官方</span>
       <h3>Claude for Chrome 發佈</h3>
       <div class="description">Google Chrome 擴充功能上線，讓 Claude Code 能直接控制瀏覽器。AI 從「產生程式碼」跨入「操作軟體介面」，這是 Cowork 的技術前身。</div>
       <div class="source-link">來源：<a href="https://www.anthropic.com/news/claude-for-chrome" target="_blank">Anthropic 官方</a>, <a href="https://venturebeat.com/infrastructure/anthropic-launches-claude-for-chrome-in-limited-beta-but-prompt-injection-attacks-remain-a-major-concern" target="_blank">VentureBeat</a></div>
@@ -481,10 +637,10 @@
   </div>
 
   <div class="event">
-    <div class="dot release"></div>
+    <div class="dot anthropic-official"></div>
     <div class="card">
       <div class="connector"></div>
-      <div class="date-badge release-badge">2025 年 11 月 24 日</div>
+      <div class="date-badge release-badge">2025 年 11 月 24 日</div><span class="official-badge">Anthropic 官方</span>
       <h3>Claude Opus 4.5 — 模型家族完成</h3>
       <div class="description">完成 Anthropic 史上最重要的模型家族。SWE-bench Verified 達 80.9%，在 Anthropic 內部效能工程師筆試中分數超過任何人類應試者。同月，Anthropic 估值因 Microsoft 和 Nvidia 注資攀升至 USD $3,500 億。</div>
       <div class="source-link">來源：<a href="https://www.anthropic.com/news/claude-opus-4-5" target="_blank">Anthropic 官方</a>, <a href="https://www.cnbc.com/2025/11/24/anthropic-unveils-claude-opus-4point5-its-latest-ai-model.html" target="_blank">CNBC</a></div>
@@ -515,10 +671,10 @@
   </div>
 
   <div class="event">
-    <div class="dot release"></div>
+    <div class="dot anthropic-official"></div>
     <div class="card">
       <div class="connector"></div>
-      <div class="date-badge release-badge">2026 年 1 月 12 日（同日）</div>
+      <div class="date-badge release-badge">2026 年 1 月 12 日（同日）</div><span class="official-badge">Anthropic 官方</span>
       <h3>Claude for Healthcare — 進軍醫療產業</h3>
       <div class="description">在 J.P. Morgan Healthcare Conference 上同步發佈。HIPAA-ready 基礎設施、原生整合 CMS Coverage Database、ICD-10 編碼、PubMed 醫學文獻。Banner Health、Stanford Healthcare、Novo Nordisk、Sanofi、AbbVie、Genmab 已在使用。功能涵蓋事前授權加速、病患照護協調、藥物審批文件。雖未像 Legal Plugin 造成即時股災，但預示 Claude 正系統性地進入每一個知識工作領域。</div>
       <div class="source-link">來源：<a href="https://www.anthropic.com/news/healthcare-life-sciences" target="_blank">Anthropic 官方</a>, <a href="https://www.fiercehealthcare.com/ai-and-machine-learning/jpm26-anthropic-launches-claude-healthcare-targeting-health-systems-payers" target="_blank">Fierce Healthcare</a>, <a href="https://techcrunch.com/2026/01/12/anthropic-announces-claude-for-healthcare-following-openais-chatgpt-health-reveal/" target="_blank">TechCrunch</a></div>
@@ -529,7 +685,7 @@
     <div class="dot partner"></div>
     <div class="card">
       <div class="connector"></div>
-      <div class="date-badge partner-badge">2026 年 1 月 28 日</div>
+      <div class="date-badge partner-badge">2026 年 1 月 28 日</div><span class="official-badge">Anthropic 官方</span>
       <h3>ServiceNow 合作：Claude 成為預設 Build Agent</h3>
       <div class="description">ServiceNow 宣布 Claude 成為其 Build Agent 的預設模型。29,000 名內部員工已部署 Claude，銷售準備時間縮短 95%。這標誌著企業級客戶正式將 Claude 嵌入核心工作流。</div>
       <div class="source-link">來源：<a href="https://www.anthropic.com/news/servicenow-anthropic-claude" target="_blank">Anthropic 官方</a>, <a href="https://techcrunch.com/2026/01/28/servicenow-inks-another-ai-partnership-this-time-with-anthropic/" target="_blank">TechCrunch</a></div>
@@ -670,10 +826,10 @@
   </div>
 
   <div class="event">
-    <div class="dot release"></div>
+    <div class="dot anthropic-official"></div>
     <div class="card">
       <div class="connector"></div>
-      <div class="date-badge release-badge">2026 年 2 月 20 日</div>
+      <div class="date-badge release-badge">2026 年 2 月 20 日</div><span class="official-badge">Anthropic 官方</span>
       <h3>Claude Code Security 發佈</h3>
       <div class="description">基於推理（而非傳統 pattern matching）的程式碼安全掃描。與傳統靜態分析（SAST）工具不同，Opus 4.6 能像人類安全研究員一樣「閱讀並推理」原始碼——從過去的修補歷史找相似 bug、理解商業邏輯漏洞、預測哪些輸入會導致崩潰。Anthropic Frontier Red Team 在正式上線的開源專案中發現超過 500 個高嚴重度漏洞，其中包括「隱藏了數十年」的 bug。Mozilla Firefox 中就被找出超過 100 個安全漏洞。</div>
       <div class="source-link">來源：<a href="https://www.anthropic.com/news/claude-code-security" target="_blank">Anthropic 官方</a>, <a href="https://venturebeat.com/security/anthropic-claude-code-security-reasoning-vulnerability-hunting" target="_blank">VentureBeat</a>, <a href="https://the-decoder.com/anthropics-claude-ai-uncovers-over-100-security-vulnerabilities-in-firefox/" target="_blank">The Decoder</a></div>
@@ -934,88 +1090,113 @@
   </div>
   <div class="bar-chart" style="margin-top: 24px;">
     <div class="bar-row">
-      <div class="bar-label">遺留系統 | IBM<br><span style="font-size:0.6rem;color:#666">2/23 COBOL · 2 月整月</span></div>
+      <div class="bar-label">遺留系統 | <a href="https://finance.yahoo.com/quote/IBM" target="_blank">IBM</a> <span class="info-icon">&#8505;<span class="tooltip">全球大型主機與遺留系統服務商，COBOL 維護年收入約 USD $200 億</span></span><br><span style="font-size:0.6rem;color:#666">2/23 COBOL · 2 月整月</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:100%; background: linear-gradient(90deg, #ff2222, #aa1111);">-27%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">印度 IT | Coforge<br><span style="font-size:0.6rem;color:#666">2/3-28 SaaSocalypse · 2 月整月</span></div>
+      <div class="bar-label">印度 IT | <a href="https://finance.yahoo.com/quote/COFORGE.NS" target="_blank">Coforge</a> <span class="info-icon">&#8505;<span class="tooltip">印度 IT 服務商，專精數位轉型與現代化</span></span><br><span style="font-size:0.6rem;color:#666">2/3-28 SaaSocalypse · 2 月整月</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:85%; background: linear-gradient(90deg, #ff3333, #bb2222);">-23%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">印度 IT | Infosys<br><span style="font-size:0.6rem;color:#666">2/3-28 SaaSocalypse · 2 月整月</span></div>
+      <div class="bar-label">印度 IT | <a href="https://finance.yahoo.com/quote/INFY" target="_blank">Infosys</a> <span class="info-icon">&#8505;<span class="tooltip">印度第二大 IT 服務商，30 萬+員工，人力外包模式</span></span><br><span style="font-size:0.6rem;color:#666">2/3-28 SaaSocalypse · 2 月整月</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:85%; background: linear-gradient(90deg, #ff3333, #bb2222);">-23%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">法律科技 | LegalZoom<br><span style="font-size:0.6rem;color:#666">2/3 Legal Plugin · 單日</span></div>
+      <div class="bar-label">法律科技 | <a href="https://finance.yahoo.com/quote/LZ" target="_blank">LegalZoom</a> <span class="info-icon">&#8505;<span class="tooltip">線上法律文件準備與小企業成立服務平台</span></span><br><span style="font-size:0.6rem;color:#666">2/3 Legal Plugin · 單日</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:73%; background: linear-gradient(90deg, #ff4444, #cc2222);">-19.7%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">印度 IT | Nifty IT Index<br><span style="font-size:0.6rem;color:#666">2/4-28 印度 IT · 2 月整月</span></div>
+      <div class="bar-label">印度 IT | <a href="https://finance.yahoo.com/quote/%5ECNXIT" target="_blank">Nifty IT Index</a> <span class="info-icon">&#8505;<span class="tooltip">印度國家證交所 IT 產業指數，涵蓋印度前 10 大 IT 公司</span></span><br><span style="font-size:0.6rem;color:#666">2/4-28 印度 IT · 2 月整月</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:70%; background: linear-gradient(90deg, #ff4444, #cc3333);">-19%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">資安 | CrowdStrike<br><span style="font-size:0.6rem;color:#666">2/20-23 Code Security · 四日</span></div>
+      <div class="bar-label">資安 | <a href="https://finance.yahoo.com/quote/CRWD" target="_blank">CrowdStrike</a> <span class="info-icon">&#8505;<span class="tooltip">端點偵測與回應 (EDR) 及威脅情報平台</span></span><br><span style="font-size:0.6rem;color:#666">2/20-23 Code Security · 四日</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:63%; background: linear-gradient(90deg, #ff5555, #cc3333);">-17%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">法律科技 | Thomson Reuters<br><span style="font-size:0.6rem;color:#666">2/3 Legal Plugin · 單日</span></div>
+      <div class="bar-label">法律科技 | <a href="https://finance.yahoo.com/quote/TRI" target="_blank">Thomson Reuters</a> <span class="info-icon">&#8505;<span class="tooltip">全球法律、稅務、新聞內容與分析平台，擁有 Westlaw</span></span><br><span style="font-size:0.6rem;color:#666">2/3 Legal Plugin · 單日</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:59%; background: linear-gradient(90deg, #ff5555, #cc3333);">-15.8%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">SaaS | Microsoft<br><span style="font-size:0.6rem;color:#666">1/30-3/9 Cowork 發佈至今</span></div>
+      <div class="bar-label">SaaS | <a href="https://finance.yahoo.com/quote/MSFT" target="_blank">Microsoft</a> <span class="info-icon">&#8505;<span class="tooltip">Office 365、Azure 雲端平台，全球最大軟體公司</span></span><br><span style="font-size:0.6rem;color:#666">1/30-3/9 Cowork 發佈至今</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:52%; background: linear-gradient(90deg, #ff6633, #cc4422);">-14%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">法律科技 | RELX<br><span style="font-size:0.6rem;color:#666">2/3 Legal Plugin · 單日</span></div>
+      <div class="bar-label">法律科技 | <a href="https://finance.yahoo.com/quote/RELX" target="_blank">RELX</a> <span class="info-icon">&#8505;<span class="tooltip">英國 FTSE 100 公司，擁有 LexisNexis 法律研究平台</span></span><br><span style="font-size:0.6rem;color:#666">2/3 Legal Plugin · 單日</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:52%; background: linear-gradient(90deg, #ff6633, #cc4422);">-14%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">遺留系統 | IBM<br><span style="font-size:0.6rem;color:#666">2/23 COBOL · 單日</span></div>
+      <div class="bar-label">遺留系統 | <a href="https://finance.yahoo.com/quote/IBM" target="_blank">IBM</a> <span class="info-icon">&#8505;<span class="tooltip">全球大型主機與遺留系統服務商，COBOL 維護年收入約 USD $200 億</span></span><br><span style="font-size:0.6rem;color:#666">2/23 COBOL · 單日</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:49%; background: linear-gradient(90deg, #ff6633, #cc4422);">-13.2%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">資安 | Okta<br><span style="font-size:0.6rem;color:#666">2/20-23 Code Security · 四日</span></div>
+      <div class="bar-label">資安 | <a href="https://finance.yahoo.com/quote/OKTA" target="_blank">Okta</a> <span class="info-icon">&#8505;<span class="tooltip">身份與存取管理 (IAM) 雲端平台</span></span><br><span style="font-size:0.6rem;color:#666">2/20-23 Code Security · 四日</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:48%; background: linear-gradient(90deg, #ff7744, #cc5533);">-13%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">金融數據 | FactSet<br><span style="font-size:0.6rem;color:#666">2/3-6 Finance Plugin · 單日</span></div>
+      <div class="bar-label">金融數據 | <a href="https://finance.yahoo.com/quote/FDS" target="_blank">FactSet</a> <span class="info-icon">&#8505;<span class="tooltip">金融數據與分析終端供應商，Bloomberg 主要競爭對手</span></span><br><span style="font-size:0.6rem;color:#666">2/3-6 Finance Plugin · 單日</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:39%; background: linear-gradient(90deg, #ff8855, #cc6644);">-10.5%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">資安 | SailPoint<br><span style="font-size:0.6rem;color:#666">2/20 Code Security · 單日</span></div>
+      <div class="bar-label">資安 | <a href="https://finance.yahoo.com/quote/SAIL" target="_blank">SailPoint</a> <span class="info-icon">&#8505;<span class="tooltip">身份安全與治理平台</span></span><br><span style="font-size:0.6rem;color:#666">2/20 Code Security · 單日</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:35%; background: linear-gradient(90deg, #ff7744, #cc5533);">-9.4%</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">金融數據 | Morningstar<br><span style="font-size:0.6rem;color:#666">2/3-6 Finance Plugin · 單日</span></div>
+      <div class="bar-label">金融數據 | <a href="https://finance.yahoo.com/quote/MORN" target="_blank">Morningstar</a> <span class="info-icon">&#8505;<span class="tooltip">投資研究、評級與投資組合管理軟體</span></span><br><span style="font-size:0.6rem;color:#666">2/3-6 Finance Plugin · 單日</span></div>
       <div class="bar-track">
         <div class="bar-fill" style="width:33%; background: linear-gradient(90deg, #ff8855, #cc6644);">-9%</div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================== -->
+<!-- STOCK PRICE CHART -->
+<!-- =========================================== -->
+<div class="stock-chart-section" id="stockchart">
+  <div class="phase-label">
+    <h2>股價走勢 — Thomson Reuters (TRI) vs IBM</h2>
+    <p>2026 年 1-3 月，兩支最具代表性的「Anthropic 受災股」的 V 型反轉故事</p>
+  </div>
+
+  <div class="stock-chart-wrap">
+    <div class="chart-legend-row">
+      <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#f0a060;"></div> Thomson Reuters (TRI)</div>
+      <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#5b8def;"></div> IBM</div>
+      <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#ff4444; width:2px; height:16px; border-left:2px dashed #ff4444;"></div> Anthropic 事件</div>
+    </div>
+
+    <svg id="stockChartSvg" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="chart-tooltip" id="chartTooltip"></div>
+
+    <div class="chart-disclaimer">
+      ※ 股價走勢為根據公開媒體報導之百分比變動估算，非即時交易數據。基準指數 100 = 2026 年 1 月 1 日收盤價。僅供視覺化參考，不構成投資建議。
     </div>
   </div>
 </div>
@@ -1177,6 +1358,158 @@ document.addEventListener('DOMContentLoaded', () => {
     label.parentNode.insertBefore(sentinel, label);
     observer.observe(sentinel);
   });
+
+  // ── Stock Price Chart ──
+  (function drawStockChart() {
+    const svg = document.getElementById('stockChartSvg');
+    if (!svg) return;
+    const W = 900, H = 400;
+    const pad = { top: 20, right: 30, bottom: 50, left: 50 };
+    const cW = W - pad.left - pad.right;
+    const cH = H - pad.top - pad.bottom;
+
+    // Date range: Jan 1 – Mar 12, 2026 (71 days)
+    const startDate = new Date(2026, 0, 1);
+    const endDate = new Date(2026, 2, 12);
+    const totalDays = Math.round((endDate - startDate) / 86400000);
+
+    function dayIndex(m, d) { return Math.round((new Date(2026, m - 1, d) - startDate) / 86400000); }
+    function xPos(di) { return pad.left + (di / totalDays) * cW; }
+    function yPos(v) { return pad.top + cH - ((v - 60) / 50) * cH; } // range 60–110
+
+    // Approximate data points (index 100 = Jan 1)
+    // Thomson Reuters TRI
+    const triData = [
+      [1,1,100],[1,5,99.5],[1,10,99],[1,12,97],[1,15,96],[1,20,95],[1,25,93],[1,28,92],
+      [1,30,90],[2,1,88],[2,3,84.2],[2,4,80],[2,5,76],[2,6,70],[2,10,72],[2,14,71],
+      [2,18,72],[2,20,71],[2,22,70],[2,24,77.7],[2,25,79],[2,27,80],[3,1,81],[3,3,82],
+      [3,5,83],[3,8,84],[3,10,84.5],[3,12,85]
+    ];
+    // IBM
+    const ibmData = [
+      [1,1,100],[1,5,99],[1,10,98],[1,12,96],[1,15,95],[1,20,94],[1,25,92],[1,28,91],
+      [1,30,89],[2,1,87],[2,3,84],[2,4,82],[2,5,80],[2,6,78],[2,10,77],[2,14,76],
+      [2,18,76],[2,20,74],[2,22,75],[2,23,65.1],[2,24,66],[2,25,67.8],[2,27,70],
+      [3,1,72],[3,3,73],[3,5,73.5],[3,8,74],[3,10,74],[3,12,73]
+    ];
+
+    // Anthropic events
+    const events = [
+      { m:1, d:12, label:'Cowork' },
+      { m:1, d:30, label:'Plugins' },
+      { m:2, d:3,  label:'Legal' },
+      { m:2, d:5,  label:'Opus 4.6' },
+      { m:2, d:20, label:'Security' },
+      { m:2, d:23, label:'COBOL' },
+      { m:2, d:24, label:'Enterprise' }
+    ];
+
+    let svgContent = '';
+
+    // Grid lines
+    for (let v = 60; v <= 110; v += 10) {
+      const y = yPos(v);
+      svgContent += `<line x1="${pad.left}" y1="${y}" x2="${W - pad.right}" y2="${y}" stroke="#1e1e28" stroke-width="1"/>`;
+      svgContent += `<text x="${pad.left - 8}" y="${y + 4}" fill="#555" font-size="11" text-anchor="end">${v}</text>`;
+    }
+
+    // X-axis month labels
+    [[1,'1月'],[2,'2月'],[3,'3月']].forEach(([m, label]) => {
+      const x = xPos(dayIndex(m, 1));
+      svgContent += `<text x="${x}" y="${H - 12}" fill="#555" font-size="11" text-anchor="middle">${label}</text>`;
+      svgContent += `<line x1="${x}" y1="${pad.top}" x2="${x}" y2="${H - pad.bottom}" stroke="#1a1a24" stroke-width="1" stroke-dasharray="4,4"/>`;
+    });
+
+    // Event vertical lines
+    events.forEach((ev, i) => {
+      const x = xPos(dayIndex(ev.m, ev.d));
+      svgContent += `<line x1="${x}" y1="${pad.top}" x2="${x}" y2="${H - pad.bottom}" stroke="rgba(255,68,68,0.35)" stroke-width="1.5" stroke-dasharray="5,4"/>`;
+      const yLabel = pad.top + 12 + (i % 2) * 14;
+      svgContent += `<text x="${x}" y="${yLabel}" fill="#ff6b6b" font-size="9" text-anchor="middle" font-weight="600">${ev.label}</text>`;
+    });
+
+    // Draw line function
+    function drawLine(data, color) {
+      const points = data.map(([m, d, v]) => `${xPos(dayIndex(m, d))},${yPos(v)}`);
+      svgContent += `<polyline points="${points.join(' ')}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+      // Dots for hover
+      data.forEach(([m, d, v]) => {
+        const cx = xPos(dayIndex(m, d)), cy = yPos(v);
+        svgContent += `<circle cx="${cx}" cy="${cy}" r="4" fill="${color}" opacity="0" class="chart-dot" data-date="${m}/${d}" data-val="${v}" data-stock=""/>`;
+      });
+    }
+
+    // Area fills
+    function drawArea(data, color) {
+      const points = data.map(([m, d, v]) => `${xPos(dayIndex(m, d))},${yPos(v)}`);
+      const firstX = xPos(dayIndex(data[0][0], data[0][1]));
+      const lastX = xPos(dayIndex(data[data.length-1][0], data[data.length-1][1]));
+      const bottomY = yPos(60);
+      svgContent += `<polygon points="${firstX},${bottomY} ${points.join(' ')} ${lastX},${bottomY}" fill="${color}" opacity="0.06"/>`;
+    }
+
+    drawArea(triData, '#f0a060');
+    drawArea(ibmData, '#5b8def');
+    drawLine(triData, '#f0a060');
+    drawLine(ibmData, '#5b8def');
+
+    // Base-100 line
+    const y100 = yPos(100);
+    svgContent += `<line x1="${pad.left}" y1="${y100}" x2="${W - pad.right}" y2="${y100}" stroke="#444" stroke-width="1" stroke-dasharray="3,3"/>`;
+    svgContent += `<text x="${W - pad.right + 4}" y="${y100 + 4}" fill="#666" font-size="10">基準 100</text>`;
+
+    svg.innerHTML = svgContent;
+
+    // Hover tooltip
+    const tooltip = document.getElementById('chartTooltip');
+    const chartWrap = svg.closest('.stock-chart-wrap');
+    const allDots = svg.querySelectorAll('.chart-dot');
+
+    // Build lookup for tooltip pairing
+    function findClosest(data, m, d) {
+      let best = data[0];
+      let bestDist = Infinity;
+      data.forEach(([dm, dd, dv]) => {
+        const dist = Math.abs(dayIndex(dm, dd) - dayIndex(m, d));
+        if (dist < bestDist) { bestDist = dist; best = [dm, dd, dv]; }
+      });
+      return best;
+    }
+
+    svg.addEventListener('mousemove', (e) => {
+      const rect = svg.getBoundingClientRect();
+      const scaleX = W / rect.width;
+      const mouseX = (e.clientX - rect.left) * scaleX;
+      const mouseY = (e.clientY - rect.top) * (H / rect.height);
+
+      // Find nearest data point
+      let nearest = null, nearestDist = Infinity;
+      triData.concat(ibmData).forEach(([m, d, v]) => {
+        const px = xPos(dayIndex(m, d)), py = yPos(v);
+        const dist = Math.hypot(px - mouseX, py - mouseY);
+        if (dist < nearestDist && dist < 40) { nearestDist = dist; nearest = [m, d]; }
+      });
+
+      if (nearest) {
+        const [m, d] = nearest;
+        const triPt = findClosest(triData, m, d);
+        const ibmPt = findClosest(ibmData, m, d);
+        tooltip.innerHTML = `<strong>2026/${m}/${d}</strong><br>TRI: <span style="color:#f0a060">${triPt[2].toFixed(1)}</span><br>IBM: <span style="color:#5b8def">${ibmPt[2].toFixed(1)}</span>`;
+        tooltip.style.display = 'block';
+        // Position relative to chart wrap
+        const wrapRect = chartWrap.getBoundingClientRect();
+        let tipX = e.clientX - wrapRect.left + 16;
+        let tipY = e.clientY - wrapRect.top - 20;
+        if (tipX + 180 > wrapRect.width) tipX = tipX - 196;
+        tooltip.style.left = tipX + 'px';
+        tooltip.style.top = tipY + 'px';
+      } else {
+        tooltip.style.display = 'none';
+      }
+    });
+
+    svg.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+  })();
 
   // Also highlight the active nav link on scroll
   const sections = document.querySelectorAll('[id]');
