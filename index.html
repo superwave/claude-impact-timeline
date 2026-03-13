@@ -450,40 +450,7 @@
     position: relative;
     overflow: hidden;
   }
-  .stock-chart-wrap svg { width: 100%; height: auto; display: block; }
-  .chart-legend-row {
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-  }
-  .chart-legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.75rem;
-    color: #999;
-  }
-  .chart-legend-swatch {
-    width: 24px; height: 3px;
-    border-radius: 2px;
-  }
-  .chart-tooltip {
-    position: absolute;
-    display: none;
-    background: rgba(20,20,30,0.95);
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 0.72rem;
-    color: #ddd;
-    line-height: 1.6;
-    pointer-events: none;
-    z-index: 30;
-    min-width: 160px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-  }
+  .stock-chart-inner canvas { display: block; }
   .chart-disclaimer {
     font-size: 0.65rem;
     color: #555;
@@ -526,6 +493,9 @@
     .phase-label { top: 0; z-index: 10; }
   }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3"></script>
 </head>
 <body>
 
@@ -1181,22 +1151,16 @@
 <!-- =========================================== -->
 <div class="stock-chart-section" id="stockchart">
   <div class="phase-label">
-    <h2>股價走勢 — Thomson Reuters (TRI) vs IBM</h2>
-    <p>2026 年 1-3 月，兩支最具代表性的「Anthropic 受災股」的 V 型反轉故事</p>
+    <h2>股價走勢 — Anthropic 衝擊全景圖</h2>
+    <p>2026 年 1-3 月，13 支受影響個股及指數的相對價格走勢（點擊圖例可切換顯示）</p>
   </div>
 
   <div class="stock-chart-wrap">
-    <div class="chart-legend-row">
-      <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#f0a060;"></div> Thomson Reuters (TRI)</div>
-      <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#5b8def;"></div> IBM</div>
-      <div class="chart-legend-item"><div class="chart-legend-swatch" style="background:#ff4444; width:2px; height:16px; border-left:2px dashed #ff4444;"></div> Anthropic 事件</div>
+    <div class="stock-chart-inner">
+      <canvas id="stockChartCanvas"></canvas>
     </div>
-
-    <svg id="stockChartSvg" viewBox="0 0 900 400" preserveAspectRatio="xMidYMid meet"></svg>
-    <div class="chart-tooltip" id="chartTooltip"></div>
-
     <div class="chart-disclaimer">
-      ※ 股價走勢為根據公開媒體報導之百分比變動估算，非即時交易數據。基準指數 100 = 2026 年 1 月 1 日收盤價。僅供視覺化參考，不構成投資建議。
+      ※ 股價走勢為根據公開媒體報導之百分比變動估算，非即時交易數據。基準 0% = 2026 年 1 月 1 日收盤價。Hover 可查看估算真實股價。僅供視覺化參考，不構成投資建議。
     </div>
   </div>
 </div>
@@ -1359,156 +1323,274 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(sentinel);
   });
 
-  // ── Stock Price Chart ──
+  // ── Stock Price Chart (Chart.js) ──
   (function drawStockChart() {
-    const svg = document.getElementById('stockChartSvg');
-    if (!svg) return;
-    const W = 900, H = 400;
-    const pad = { top: 20, right: 30, bottom: 50, left: 50 };
-    const cW = W - pad.left - pad.right;
-    const cH = H - pad.top - pad.bottom;
+    const canvas = document.getElementById('stockChartCanvas');
+    if (!canvas) return;
 
-    // Date range: Jan 1 – Mar 12, 2026 (71 days)
-    const startDate = new Date(2026, 0, 1);
-    const endDate = new Date(2026, 2, 12);
-    const totalDays = Math.round((endDate - startDate) / 86400000);
+    // Interpolate key points to daily data (skip weekends), with subtle noise
+    function toDaily(keys, seed) {
+      let rng = seed || 42;
+      function noise() { rng = (rng * 1664525 + 1013904223) & 0x7fffffff; return ((rng % 1000) / 1000 - 0.5) * 0.5; }
+      const pts = [];
+      for (let i = 0; i < keys.length - 1; i++) {
+        const [d1, v1] = keys[i], [d2, v2] = keys[i + 1];
+        const t1 = new Date(d1).getTime(), t2 = new Date(d2).getTime();
+        const days = Math.round((t2 - t1) / 864e5);
+        for (let j = 0; j < days; j++) {
+          const t = t1 + j * 864e5, dt = new Date(t), dow = dt.getDay();
+          if (dow === 0 || dow === 6) continue;
+          const frac = j / days, v = v1 + (v2 - v1) * frac + noise();
+          pts.push({ x: dt.toISOString().split('T')[0], y: Math.round(v * 100) / 100 });
+        }
+      }
+      const last = keys[keys.length - 1];
+      pts.push({ x: last[0], y: last[1] });
+      return pts;
+    }
 
-    function dayIndex(m, d) { return Math.round((new Date(2026, m - 1, d) - startDate) / 86400000); }
-    function xPos(di) { return pad.left + (di / totalDays) * cW; }
-    function yPos(v) { return pad.top + cH - ((v - 60) / 50) * cH; } // range 60–110
+    // Rebase so value nearest to targetDate = 100
+    function rebase(data, targetDate) {
+      const tgt = new Date(targetDate).getTime();
+      let closest = data[0], minDist = Infinity;
+      for (const p of data) {
+        const dist = Math.abs(new Date(p.x).getTime() - tgt);
+        if (dist < minDist) { minDist = dist; closest = p; }
+      }
+      const scale = 100 / closest.y;
+      return data.map(p => ({ x: p.x, y: Math.round(p.y * scale * 100) / 100 }));
+    }
 
-    // Approximate data points (index 100 = Jan 1)
-    // Thomson Reuters TRI
-    const triData = [
-      [1,1,100],[1,5,99.5],[1,10,99],[1,12,97],[1,15,96],[1,20,95],[1,25,93],[1,28,92],
-      [1,30,90],[2,1,88],[2,3,84.2],[2,4,80],[2,5,76],[2,6,70],[2,10,72],[2,14,71],
-      [2,18,72],[2,20,71],[2,22,70],[2,24,77.7],[2,25,79],[2,27,80],[3,1,81],[3,3,82],
-      [3,5,83],[3,8,84],[3,10,84.5],[3,12,85]
+    // Stock definitions: key points [date, indexValue] where 100 = 2025-01-02
+    // basePrice = approximate real price on 2025-01-02, currency for tooltip display
+    const stocks = [
+      { ticker: 'TRI', name: 'Thomson Reuters', color: '#f0a060', w: 2.5,
+        basePrice: 173, currency: '$', keys: [
+        ['2025-01-02',100],['2025-02-01',100.5],['2025-03-01',101],['2025-04-01',101.5],['2025-05-01',102],
+        ['2025-06-01',103],['2025-07-01',103.5],['2025-08-01',103.8],['2025-09-01',104],
+        ['2025-10-01',104.2],['2025-11-01',104.5],['2025-12-01',105],['2025-12-31',105],
+        ['2026-01-05',104.5],['2026-01-10',103.9],['2026-01-12',103],['2026-01-15',100.8],['2026-01-20',99.8],
+        ['2026-01-25',97.7],['2026-01-28',96.6],['2026-01-30',94.5],['2026-02-01',92.4],
+        ['2026-02-03',88.4],['2026-02-04',84],['2026-02-05',79.8],['2026-02-06',73.5],
+        ['2026-02-10',75.6],['2026-02-14',74.6],['2026-02-18',75.6],['2026-02-20',74.6],['2026-02-22',73.5],
+        ['2026-02-24',81.6],['2026-02-25',83],['2026-02-27',84],
+        ['2026-03-01',85.1],['2026-03-05',87.2],['2026-03-08',88.2],['2026-03-12',89.3]
+      ]},
+      { ticker: 'IBM', name: 'IBM', color: '#5b8def', w: 2.5,
+        basePrice: 202, currency: '$', keys: [
+        ['2025-01-02',100],['2025-02-01',100.3],['2025-03-01',101],['2025-04-01',101.5],['2025-05-01',102],
+        ['2025-06-01',103],['2025-07-01',103.2],['2025-08-01',103.5],['2025-09-01',104],
+        ['2025-10-01',104.2],['2025-11-01',104.5],['2025-12-01',105],['2025-12-31',105],
+        ['2026-01-05',104.5],['2026-01-10',102.9],['2026-01-15',99.8],['2026-01-20',98.7],
+        ['2026-01-25',96.6],['2026-01-28',95.6],['2026-01-30',93.5],
+        ['2026-02-01',91.4],['2026-02-03',88.2],['2026-02-04',86.1],['2026-02-05',84],['2026-02-06',81.9],
+        ['2026-02-10',80.9],['2026-02-14',79.8],['2026-02-18',79.8],['2026-02-20',77.7],['2026-02-22',78.8],
+        ['2026-02-23',68.4],['2026-02-24',69.3],['2026-02-25',71.2],['2026-02-27',73.5],
+        ['2026-03-01',75.6],['2026-03-05',77.2],['2026-03-08',77.7],['2026-03-12',76.7]
+      ]},
+      { ticker: 'LZ', name: 'LegalZoom', color: '#ffd700', w: 1.8,
+        basePrice: 7.82, currency: '$', keys: [
+        ['2025-01-02',100],['2025-03-01',103],['2025-05-01',107],['2025-07-01',110],
+        ['2025-09-01',112],['2025-11-01',114],['2025-12-31',115],
+        ['2026-01-15',114],['2026-01-30',110],['2026-02-02',108],
+        ['2026-02-03',87],['2026-02-04',84],['2026-02-06',82],['2026-02-10',83],['2026-02-18',81],
+        ['2026-02-24',85],['2026-03-01',86],['2026-03-12',88]
+      ]},
+      { ticker: 'RELX', name: 'RELX (LexisNexis)', color: '#e8a0e8', w: 1.8,
+        basePrice: 50.93, currency: '$', keys: [
+        ['2025-01-02',100],['2025-03-01',101],['2025-05-01',102.5],['2025-07-01',104],
+        ['2025-09-01',104],['2025-11-01',104.5],['2025-12-31',105],
+        ['2026-01-15',104.5],['2026-01-30',102],
+        ['2026-02-03',88],['2026-02-04',86.5],['2026-02-06',86],['2026-02-14',87],['2026-02-24',90],
+        ['2026-03-01',91],['2026-03-12',92]
+      ]},
+      { ticker: 'CRWD', name: 'CrowdStrike', color: '#00d2d3', w: 1.8,
+        basePrice: 394, currency: '$', keys: [
+        ['2025-01-02',100],['2025-03-01',102],['2025-05-01',105],['2025-07-01',108],
+        ['2025-09-01',109],['2025-11-01',111],['2025-12-31',112],
+        ['2026-01-15',111],['2026-02-01',108],['2026-02-10',106],['2026-02-19',105],
+        ['2026-02-20',98],['2026-02-21',93],['2026-02-23',87],
+        ['2026-02-25',89],['2026-03-01',91],['2026-03-12',93]
+      ]},
+      { ticker: 'OKTA', name: 'Okta', color: '#7bed9f', w: 1.5,
+        basePrice: 91, currency: '$', keys: [
+        ['2025-01-02',100],['2025-03-01',102],['2025-05-01',105],['2025-07-01',108],
+        ['2025-09-01',109],['2025-11-01',111],['2025-12-31',112],
+        ['2026-01-15',111],['2026-02-01',108],['2026-02-19',107],
+        ['2026-02-20',97],['2026-02-21',95],['2026-02-23',93],
+        ['2026-02-25',94],['2026-03-01',96],['2026-03-12',97]
+      ]},
+      { ticker: 'SAIL', name: 'SailPoint', color: '#48dbfb', w: 1.5,
+        basePrice: 19.25, currency: '$', keys: [
+        ['2025-01-02',100],['2025-03-01',102],['2025-05-01',105],['2025-07-01',107],
+        ['2025-09-01',108],['2025-11-01',109.5],['2025-12-31',110],
+        ['2026-01-15',109],['2026-02-01',107],['2026-02-19',106],
+        ['2026-02-20',96],['2026-02-24',97],['2026-03-01',98],['2026-03-12',99]
+      ]},
+      { ticker: 'COFORGE.NS', name: 'Coforge', color: '#ff6b6b', w: 1.8,
+        basePrice: 7898, currency: '₹', keys: [
+        ['2025-01-02',100],['2025-03-01',102],['2025-05-01',105],['2025-07-01',107],
+        ['2025-09-01',108],['2025-11-01',109.5],['2025-12-31',110],
+        ['2026-01-15',109],['2026-02-01',106],['2026-02-04',100],
+        ['2026-02-07',97],['2026-02-10',95],['2026-02-14',92],['2026-02-18',90],
+        ['2026-02-24',86],['2026-02-28',84.7],
+        ['2026-03-05',85],['2026-03-12',86]
+      ]},
+      { ticker: 'INFY', name: 'Infosys', color: '#ee5a24', w: 1.8,
+        basePrice: 23.00, currency: '$', keys: [
+        ['2025-01-02',100],['2025-03-01',101.5],['2025-05-01',104],['2025-07-01',106],
+        ['2025-09-01',106.5],['2025-11-01',107.5],['2025-12-31',108],
+        ['2026-01-15',107],['2026-02-01',104],['2026-02-04',98],
+        ['2026-02-07',96],['2026-02-10',94],['2026-02-14',91],['2026-02-18',89],
+        ['2026-02-24',85],['2026-02-28',83.2],
+        ['2026-03-05',84],['2026-03-12',85]
+      ]},
+      { ticker: '^CNXIT', name: 'Nifty IT Index', color: '#ff9f43', w: 2, dash: [6,3],
+        basePrice: 39744, currency: '', suffix: ' pts', keys: [
+        ['2025-01-02',100],['2025-03-01',101.5],['2025-05-01',104],['2025-07-01',106],
+        ['2025-09-01',106.5],['2025-11-01',107.5],['2025-12-31',108],
+        ['2026-01-15',107],['2026-02-01',104],['2026-02-04',99],
+        ['2026-02-07',97],['2026-02-10',95],['2026-02-14',93],['2026-02-18',92],
+        ['2026-02-24',89],['2026-02-28',87.5],
+        ['2026-03-05',88],['2026-03-12',89]
+      ]},
+      { ticker: 'MSFT', name: 'Microsoft', color: '#a29bfe', w: 1.8,
+        basePrice: 439, currency: '$', keys: [
+        ['2025-01-02',100],['2025-03-01',101],['2025-05-01',102],['2025-07-01',104],
+        ['2025-09-01',104],['2025-11-01',104.5],['2025-12-31',105],
+        ['2026-01-15',104],['2026-01-30',103],['2026-02-03',98],['2026-02-06',95],
+        ['2026-02-10',94],['2026-02-14',93],['2026-02-18',92],['2026-02-23',90],['2026-02-28',89],
+        ['2026-03-05',88.8],['2026-03-09',88.6],['2026-03-12',89]
+      ]},
+      { ticker: 'FDS', name: 'FactSet', color: '#ff9ff3', w: 1.5,
+        basePrice: 511, currency: '$', keys: [
+        ['2025-01-02',100],['2025-03-01',101],['2025-05-01',103],['2025-07-01',104],
+        ['2025-09-01',104.5],['2025-11-01',105.5],['2025-12-31',106],
+        ['2026-01-15',105.5],['2026-02-02',104],
+        ['2026-02-03',93],['2026-02-04',91.5],['2026-02-06',91],['2026-02-14',92],
+        ['2026-02-24',97.5],['2026-03-01',98],['2026-03-12',99]
+      ]},
+      { ticker: 'MORN', name: 'Morningstar', color: '#c8d6e5', w: 1.5,
+        basePrice: 338, currency: '$', keys: [
+        ['2025-01-02',100],['2025-03-01',101],['2025-05-01',102.5],['2025-07-01',104],
+        ['2025-09-01',104],['2025-11-01',104.5],['2025-12-31',105],
+        ['2026-01-15',104.5],['2026-02-02',103],
+        ['2026-02-03',94],['2026-02-04',92.5],['2026-02-06',92],['2026-02-14',93],
+        ['2026-02-24',95],['2026-03-01',96],['2026-03-12',97]
+      ]}
     ];
-    // IBM
-    const ibmData = [
-      [1,1,100],[1,5,99],[1,10,98],[1,12,96],[1,15,95],[1,20,94],[1,25,92],[1,28,91],
-      [1,30,89],[2,1,87],[2,3,84],[2,4,82],[2,5,80],[2,6,78],[2,10,77],[2,14,76],
-      [2,18,76],[2,20,74],[2,22,75],[2,23,65.1],[2,24,66],[2,25,67.8],[2,27,70],
-      [3,1,72],[3,3,73],[3,5,73.5],[3,8,74],[3,10,74],[3,12,73]
-    ];
 
-    // Anthropic events
-    const events = [
-      { m:1, d:12, label:'Cowork' },
-      { m:1, d:30, label:'Plugins' },
-      { m:2, d:3,  label:'Legal' },
-      { m:2, d:5,  label:'Opus 4.6' },
-      { m:2, d:20, label:'Security' },
-      { m:2, d:23, label:'COBOL' },
-      { m:2, d:24, label:'Enterprise' }
-    ];
+    // Default visible: IBM, TRI, LZ, CRWD, ^CNXIT, MSFT
+    const defaultVisible = new Set(['IBM','TRI','LZ','CRWD','^CNXIT','MSFT']);
 
-    let svgContent = '';
+    // Build datasets with daily-interpolated data
+    const datasets = stocks.map((s, i) => ({
+      label: `${s.name} (${s.ticker})`,
+      data: rebase(toDaily(s.keys, 42 + i * 7), '2026-01-01'),
+      hidden: !defaultVisible.has(s.ticker),
+      borderColor: s.color,
+      backgroundColor: s.color + '18',
+      borderWidth: s.w || 2,
+      borderDash: s.dash || [],
+      pointRadius: 0,
+      pointHoverRadius: 4,
+      pointHoverBackgroundColor: s.color,
+      tension: 0.25,
+      fill: false
+    }));
 
-    // Grid lines
-    for (let v = 60; v <= 110; v += 10) {
-      const y = yPos(v);
-      svgContent += `<line x1="${pad.left}" y1="${y}" x2="${W - pad.right}" y2="${y}" stroke="#1e1e28" stroke-width="1"/>`;
-      svgContent += `<text x="${pad.left - 8}" y="${y + 4}" fill="#555" font-size="11" text-anchor="end">${v}</text>`;
-    }
-
-    // X-axis month labels
-    [[1,'1月'],[2,'2月'],[3,'3月']].forEach(([m, label]) => {
-      const x = xPos(dayIndex(m, 1));
-      svgContent += `<text x="${x}" y="${H - 12}" fill="#555" font-size="11" text-anchor="middle">${label}</text>`;
-      svgContent += `<line x1="${x}" y1="${pad.top}" x2="${x}" y2="${H - pad.bottom}" stroke="#1a1a24" stroke-width="1" stroke-dasharray="4,4"/>`;
-    });
-
-    // Event vertical lines
-    events.forEach((ev, i) => {
-      const x = xPos(dayIndex(ev.m, ev.d));
-      svgContent += `<line x1="${x}" y1="${pad.top}" x2="${x}" y2="${H - pad.bottom}" stroke="rgba(255,68,68,0.35)" stroke-width="1.5" stroke-dasharray="5,4"/>`;
-      const yLabel = pad.top + 12 + (i % 2) * 14;
-      svgContent += `<text x="${x}" y="${yLabel}" fill="#ff6b6b" font-size="9" text-anchor="middle" font-weight="600">${ev.label}</text>`;
-    });
-
-    // Draw line function
-    function drawLine(data, color) {
-      const points = data.map(([m, d, v]) => `${xPos(dayIndex(m, d))},${yPos(v)}`);
-      svgContent += `<polyline points="${points.join(' ')}" fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`;
-      // Dots for hover
-      data.forEach(([m, d, v]) => {
-        const cx = xPos(dayIndex(m, d)), cy = yPos(v);
-        svgContent += `<circle cx="${cx}" cy="${cy}" r="4" fill="${color}" opacity="0" class="chart-dot" data-date="${m}/${d}" data-val="${v}" data-stock=""/>`;
-      });
-    }
-
-    // Area fills
-    function drawArea(data, color) {
-      const points = data.map(([m, d, v]) => `${xPos(dayIndex(m, d))},${yPos(v)}`);
-      const firstX = xPos(dayIndex(data[0][0], data[0][1]));
-      const lastX = xPos(dayIndex(data[data.length-1][0], data[data.length-1][1]));
-      const bottomY = yPos(60);
-      svgContent += `<polygon points="${firstX},${bottomY} ${points.join(' ')} ${lastX},${bottomY}" fill="${color}" opacity="0.06"/>`;
-    }
-
-    drawArea(triData, '#f0a060');
-    drawArea(ibmData, '#5b8def');
-    drawLine(triData, '#f0a060');
-    drawLine(ibmData, '#5b8def');
-
-    // Base-100 line
-    const y100 = yPos(100);
-    svgContent += `<line x1="${pad.left}" y1="${y100}" x2="${W - pad.right}" y2="${y100}" stroke="#444" stroke-width="1" stroke-dasharray="3,3"/>`;
-    svgContent += `<text x="${W - pad.right + 4}" y="${y100 + 4}" fill="#666" font-size="10">基準 100</text>`;
-
-    svg.innerHTML = svgContent;
-
-    // Hover tooltip
-    const tooltip = document.getElementById('chartTooltip');
-    const chartWrap = svg.closest('.stock-chart-wrap');
-    const allDots = svg.querySelectorAll('.chart-dot');
-
-    // Build lookup for tooltip pairing
-    function findClosest(data, m, d) {
-      let best = data[0];
-      let bestDist = Infinity;
-      data.forEach(([dm, dd, dv]) => {
-        const dist = Math.abs(dayIndex(dm, dd) - dayIndex(m, d));
-        if (dist < bestDist) { bestDist = dist; best = [dm, dd, dv]; }
-      });
-      return best;
-    }
-
-    svg.addEventListener('mousemove', (e) => {
-      const rect = svg.getBoundingClientRect();
-      const scaleX = W / rect.width;
-      const mouseX = (e.clientX - rect.left) * scaleX;
-      const mouseY = (e.clientY - rect.top) * (H / rect.height);
-
-      // Find nearest data point
-      let nearest = null, nearestDist = Infinity;
-      triData.concat(ibmData).forEach(([m, d, v]) => {
-        const px = xPos(dayIndex(m, d)), py = yPos(v);
-        const dist = Math.hypot(px - mouseX, py - mouseY);
-        if (dist < nearestDist && dist < 40) { nearestDist = dist; nearest = [m, d]; }
-      });
-
-      if (nearest) {
-        const [m, d] = nearest;
-        const triPt = findClosest(triData, m, d);
-        const ibmPt = findClosest(ibmData, m, d);
-        tooltip.innerHTML = `<strong>2026/${m}/${d}</strong><br>TRI: <span style="color:#f0a060">${triPt[2].toFixed(1)}</span><br>IBM: <span style="color:#5b8def">${ibmPt[2].toFixed(1)}</span>`;
-        tooltip.style.display = 'block';
-        // Position relative to chart wrap
-        const wrapRect = chartWrap.getBoundingClientRect();
-        let tipX = e.clientX - wrapRect.left + 16;
-        let tipY = e.clientY - wrapRect.top - 20;
-        if (tipX + 180 > wrapRect.width) tipX = tipX - 196;
-        tooltip.style.left = tipX + 'px';
-        tooltip.style.top = tipY + 'px';
-      } else {
-        tooltip.style.display = 'none';
+    // Anthropic event annotations
+    const ev = (date, label, color, yAdj) => ({
+      type: 'line', xMin: date, xMax: date,
+      borderColor: color + '50', borderWidth: 1.5, borderDash: [5, 4],
+      label: {
+        display: true, content: label, position: 'end',
+        backgroundColor: color + '20', color: color,
+        font: { size: 12, weight: 'bold', family: "'Inter','Noto Sans TC',sans-serif" },
+        padding: { top: 4, bottom: 4, left: 8, right: 8 }, borderRadius: 4,
+        yAdjust: yAdj || 0
       }
     });
 
-    svg.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+    const annotations = {
+      e6:  ev('2026-01-12', 'Cowork 發佈 + 醫療 Plugin',       '#ff6b6b', 0),
+      e7:  ev('2026-01-30', '11 產業 Plugin 同步上線',       '#ff6b6b', 18),
+      e8:  ev('2026-02-05', 'Opus 4.6 模型發佈',             '#ff6b6b', 0),
+      e9:  ev('2026-02-20', 'Claude Code Security 發佈',     '#ff6b6b', 18),
+      e10: ev('2026-02-23', 'COBOL 現代化宣言',              '#ff4444', 0),
+      e11: ev('2026-02-24', 'Enterprise Agents + 市場反彈',  '#6be8a8', 36),
+      e12: ev('2026-03-09', 'Microsoft Copilot Cowork 合作', '#5b8def', 0),
+      baseline: {
+        type: 'line', yMin: 100, yMax: 100,
+        borderColor: '#555', borderWidth: 1, borderDash: [4, 4],
+        label: { display: true, content: '基準價 (2026/1/1)', position: 'end',
+          backgroundColor: 'transparent', color: '#666', font: { size: 10 }, padding: 2 }
+      }
+    };
+
+    new Chart(canvas, {
+      type: 'line',
+      data: { datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: window.innerWidth < 768 ? 1.2 : 2.2,
+        interaction: { mode: 'index', intersect: false },
+        scales: {
+          x: {
+            type: 'time',
+            time: { unit: 'month', displayFormats: { month: 'yyyy/MM', week: 'MM/dd' }, tooltipFormat: 'yyyy/MM/dd' },
+            min: '2026-01-01', max: '2026-03-12',
+            grid: { color: '#1e1e28', drawTicks: false },
+            ticks: { color: '#666', font: { size: 11 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 30 },
+            border: { color: '#333' }
+          },
+          y: {
+            min: 60, max: 105,
+            grid: { color: '#1e1e28', drawTicks: false },
+            ticks: {
+              color: '#666', font: { size: 11 }, stepSize: 5,
+              callback: v => { const d = v - 100; return (d >= 0 ? '+' : '') + d + '%'; }
+            },
+            border: { color: '#333' },
+            title: { display: true, text: '相對基準價變化 (%)', color: '#666', font: { size: 11 } }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: '#aaa', font: { size: 11, family: "'Inter','Noto Sans TC',sans-serif" },
+              boxWidth: 20, boxHeight: 3, padding: 10, usePointStyle: false
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(15,15,25,0.95)', titleColor: '#eee', bodyColor: '#ccc',
+            borderColor: '#444', borderWidth: 1, cornerRadius: 8, padding: 12,
+            titleFont: { size: 13, weight: 'bold' }, bodyFont: { size: 11.5 },
+            itemSort: (a, b) => a.parsed.y - b.parsed.y,
+            callbacks: {
+              label: ctx => {
+                const idx = ctx.parsed.y;
+                const s = stocks[ctx.datasetIndex];
+                const realPrice = s.basePrice * idx / 100;
+                const pct = idx - 100;
+                const sign = pct >= 0 ? '+' : '';
+                const pre = s.currency || '';
+                const suf = s.suffix || '';
+                const priceStr = s.basePrice >= 1000
+                  ? pre + Math.round(realPrice).toLocaleString() + suf
+                  : s.basePrice >= 10
+                    ? pre + realPrice.toFixed(1) + suf
+                    : pre + realPrice.toFixed(2) + suf;
+                return ` ${s.name}: ${priceStr}  (${sign}${pct.toFixed(1)}%)`;
+              }
+            }
+          },
+          annotation: { annotations }
+        }
+      }
+    });
   })();
 
   // Also highlight the active nav link on scroll
