@@ -451,6 +451,7 @@
     overflow: hidden;
   }
   .stock-chart-inner canvas { display: block; }
+  .stock-chart-legend { display: none; }
   .chart-disclaimer {
     font-size: 0.65rem;
     color: #555;
@@ -487,7 +488,31 @@
     .info-icon .tooltip::after { left: auto; right: 14px; transform: none; }
     .dot.anthropic-official { width: 18px; height: 18px; }
     .dot.anthropic-official::after { width: 26px; height: 26px; top: -4px; left: -4px; }
-    .stock-chart-wrap { padding: 12px; }
+    .stock-chart-wrap { padding: 10px 6px; }
+    .stock-chart-legend {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 8px;
+      margin-bottom: 8px;
+      padding: 0 4px;
+    }
+    .stock-chart-legend .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.62rem;
+      color: #aaa;
+      cursor: pointer;
+      padding: 3px 4px;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .stock-chart-legend .legend-item.hidden { opacity: 0.3; text-decoration: line-through; }
+    .stock-chart-legend .legend-swatch {
+      width: 14px; height: 3px; border-radius: 2px; flex-shrink: 0;
+    }
     .sector-grid { grid-template-columns: 1fr; }
     .prediction-grid { grid-template-columns: 1fr; }
     .phase-label { top: 0; z-index: 10; }
@@ -562,6 +587,7 @@
   </div>
 
   <div class="stock-chart-wrap">
+    <div class="stock-chart-legend" id="stockChartLegend"></div>
     <div class="stock-chart-inner">
       <canvas id="stockChartCanvas"></canvas>
     </div>
@@ -1480,8 +1506,11 @@ document.addEventListener('DOMContentLoaded', () => {
       ]}
     ];
 
-    // Default visible: IBM, TRI, LZ, CRWD, ^CNXIT, MSFT
-    const defaultVisible = new Set(['IBM','TRI','LZ','CRWD','^CNXIT','MSFT']);
+    // Default visible: fewer on mobile for readability
+    const isMobile = window.innerWidth < 768;
+    const defaultVisible = isMobile
+      ? new Set(['IBM','TRI','CRWD','MSFT'])
+      : new Set(['IBM','TRI','LZ','CRWD','^CNXIT','MSFT']);
 
     // Build datasets with daily-interpolated data
     const datasets = stocks.map((s, i) => ({
@@ -1528,13 +1557,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    new Chart(canvas, {
+    // On mobile, hide annotation text labels (keep vertical lines)
+    if (isMobile) {
+      Object.values(annotations).forEach(a => {
+        if (a.label && a.label.display) a.label.display = false;
+      });
+    }
+
+    const chart = new Chart(canvas, {
       type: 'line',
       data: { datasets },
       options: {
         responsive: true,
         maintainAspectRatio: true,
-        aspectRatio: window.innerWidth < 768 ? 1.2 : 2.2,
+        aspectRatio: isMobile ? 0.85 : 2.2,
         interaction: { mode: 'index', intersect: false },
         scales: {
           x: {
@@ -1542,22 +1578,23 @@ document.addEventListener('DOMContentLoaded', () => {
             time: { unit: 'month', displayFormats: { month: 'yyyy/MM', week: 'MM/dd' }, tooltipFormat: 'yyyy/MM/dd' },
             min: '2026-01-01', max: '2026-03-12',
             grid: { color: '#1e1e28', drawTicks: false },
-            ticks: { color: '#666', font: { size: 11 }, maxRotation: 0, autoSkip: true, maxTicksLimit: 30 },
+            ticks: { color: '#666', font: { size: isMobile ? 9 : 11 }, maxRotation: 0, autoSkip: true, maxTicksLimit: isMobile ? 4 : 30 },
             border: { color: '#333' }
           },
           y: {
             min: 60, max: 105,
             grid: { color: '#1e1e28', drawTicks: false },
             ticks: {
-              color: '#666', font: { size: 11 }, stepSize: 5,
+              color: '#666', font: { size: isMobile ? 9 : 11 }, stepSize: isMobile ? 10 : 5,
               callback: v => { const d = v - 100; return (d >= 0 ? '+' : '') + d + '%'; }
             },
             border: { color: '#333' },
-            title: { display: true, text: '相對基準價變化 (%)', color: '#666', font: { size: 11 } }
+            title: { display: !isMobile, text: '相對基準價變化 (%)', color: '#666', font: { size: 11 } }
           }
         },
         plugins: {
           legend: {
+            display: !isMobile,
             position: 'top',
             labels: {
               color: '#aaa', font: { size: 11, family: "'Inter','Noto Sans TC',sans-serif" },
@@ -1566,8 +1603,8 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           tooltip: {
             backgroundColor: 'rgba(15,15,25,0.95)', titleColor: '#eee', bodyColor: '#ccc',
-            borderColor: '#444', borderWidth: 1, cornerRadius: 8, padding: 12,
-            titleFont: { size: 13, weight: 'bold' }, bodyFont: { size: 11.5 },
+            borderColor: '#444', borderWidth: 1, cornerRadius: 8, padding: isMobile ? 8 : 12,
+            titleFont: { size: isMobile ? 11 : 13, weight: 'bold' }, bodyFont: { size: isMobile ? 10 : 11.5 },
             itemSort: (a, b) => a.parsed.y - b.parsed.y,
             callbacks: {
               label: ctx => {
@@ -1591,6 +1628,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     });
+
+    // Build custom HTML legend for mobile
+    if (isMobile) {
+      const legendEl = document.getElementById('stockChartLegend');
+      stocks.forEach((s, i) => {
+        const item = document.createElement('div');
+        item.className = 'legend-item' + (datasets[i].hidden ? ' hidden' : '');
+        const swatch = document.createElement('span');
+        swatch.className = 'legend-swatch';
+        swatch.style.background = s.color;
+        if (s.dash) { swatch.style.background = `repeating-linear-gradient(90deg, ${s.color} 0 4px, transparent 4px 6px)`; }
+        item.appendChild(swatch);
+        item.appendChild(document.createTextNode(s.ticker));
+        item.addEventListener('click', () => {
+          const meta = chart.getDatasetMeta(i);
+          meta.hidden = !meta.hidden;
+          item.classList.toggle('hidden', meta.hidden);
+          chart.update();
+        });
+        legendEl.appendChild(item);
+      });
+    }
   })();
 
   // Also highlight the active nav link on scroll
