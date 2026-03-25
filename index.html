@@ -271,6 +271,28 @@
   }
   .quote-callout .author { font-style: normal; font-size: 0.75rem; color: #666; margin-top: 8px; }
 
+  .visual-callout {
+    max-width: 900px;
+    margin: -20px auto 48px;
+    padding: 24px 28px 20px;
+    background: #111118;
+    border-left: 3px solid #d4622b;
+    border-radius: 0 10px 10px 0;
+  }
+  .visual-callout .visual-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #f0a060;
+    margin-bottom: 16px;
+  }
+  .visual-callout .visual-caption {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 12px;
+    font-style: italic;
+  }
+  .visual-callout svg { display: block; width: 100%; height: auto; }
+
   /* Legend */
   .legend {
     display: flex;
@@ -1195,6 +1217,76 @@
     </div>
   </div>
 
+</div>
+
+<div class="visual-callout">
+  <div class="visual-title">Anthropic Agentic 架構 — 2/25 至 3/25，五個產品如何將手機與桌面串成一體</div>
+  <svg viewBox="0 0 1100 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;font-family:'Inter','Noto Sans TC',sans-serif;">
+  <defs>
+    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#888"/></marker>
+  </defs>
+
+  <!-- User's Mobile boundary -->
+  <rect x="20" y="40" width="240" height="440" rx="12" fill="none" stroke="#333" stroke-width="1"/>
+  <text x="40" y="70" font-size="13" font-weight="500" fill="#888">User's mobile</text>
+
+  <!-- Telegram/Discord box -->
+  <rect x="50" y="110" width="170" height="64" rx="8" fill="#1a1a24" stroke="#333" stroke-width="0.5"/>
+  <text x="135" y="140" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Telegram /</text>
+  <text x="135" y="160" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Discord</text>
+
+  <!-- Claude APP box -->
+  <rect x="50" y="260" width="170" height="64" rx="8" fill="#1a1a24" stroke="#333" stroke-width="0.5"/>
+  <text x="135" y="298" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Claude App</text>
+
+  <!-- User's Computer boundary -->
+  <rect x="440" y="40" width="640" height="440" rx="12" fill="none" stroke="#333" stroke-width="1"/>
+  <text x="460" y="70" font-size="13" font-weight="500" fill="#888">User's computer</text>
+
+  <!-- Claude Code box -->
+  <rect x="510" y="100" width="200" height="100" rx="10" fill="#0f1e2e" stroke="#5b8def" stroke-width="1.5"/>
+  <text x="610" y="158" font-size="16" font-weight="600" fill="#85b7eb" text-anchor="middle">Claude Code</text>
+
+  <!-- Auto Mode badge -->
+  <rect x="530" y="82" width="130" height="28" rx="6" fill="#111118" stroke="#e87b35" stroke-width="1.2"/>
+  <text x="595" y="101" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">AUTO MODE (3/25)</text>
+
+  <!-- Claude Cowork box -->
+  <rect x="510" y="300" width="200" height="100" rx="10" fill="#0f2420" stroke="#5dcaa5" stroke-width="1.5"/>
+  <text x="610" y="358" font-size="16" font-weight="600" fill="#7bed9f" text-anchor="middle">Claude Cowork</text>
+
+  <!-- Project badge -->
+  <rect x="560" y="390" width="120" height="28" rx="6" fill="#111118" stroke="#e87b35" stroke-width="1.2"/>
+  <text x="620" y="409" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">PROJECT (3/20)</text>
+
+  <!-- Browser / other APP box -->
+  <rect x="870" y="190" width="170" height="80" rx="8" fill="#1a1a24" stroke="#333" stroke-width="0.5"/>
+  <text x="955" y="228" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Browser,</text>
+  <text x="955" y="250" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">other App</text>
+
+  <!-- Arrow: Telegram → Code (Channel) -->
+  <line x1="220" y1="142" x2="505" y2="142" stroke="#888" stroke-width="1.5" marker-end="url(#ah)"/>
+  <text x="350" y="132" font-size="12" font-weight="600" fill="#e87b35" text-anchor="middle">CHANNEL (3/20)</text>
+
+  <!-- Arrow: Claude App → Code (Remote Control) -->
+  <line x1="220" y1="280" x2="505" y2="175" stroke="#888" stroke-width="1.5" marker-end="url(#ah)"/>
+  <text x="310" y="210" font-size="12" font-weight="600" fill="#e87b35" text-anchor="middle">REMOTE CONTROL (2/25)</text>
+
+  <!-- Arrow: Claude App → Cowork (Dispatch) -->
+  <line x1="220" y1="305" x2="505" y2="345" stroke="#888" stroke-width="1.5" marker-end="url(#ah)"/>
+  <text x="330" y="345" font-size="12" font-weight="600" fill="#e87b35" text-anchor="middle">DISPATCH (3/17)</text>
+
+  <!-- Computer Use: Code → junction point -->
+  <line x1="710" y1="170" x2="770" y2="230" stroke="#888" stroke-width="1.5"/>
+  <!-- Computer Use: Cowork → junction point -->
+  <line x1="710" y1="330" x2="770" y2="230" stroke="#888" stroke-width="1.5"/>
+  <!-- Computer Use: junction → Browser -->
+  <line x1="770" y1="230" x2="865" y2="230" stroke="#888" stroke-width="1.5" marker-end="url(#ah)"/>
+  <!-- Computer Use label -->
+  <text x="818" y="218" font-size="12" font-weight="600" fill="#e87b35" text-anchor="middle">COMPUTER USE</text>
+  <text x="818" y="253" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">(3/24)</text>
+  </svg>
+  <div class="visual-caption">架構圖：使用者從手機端透過三條路徑（Remote Control、Dispatch、Channel）觸發桌面端的 Claude Code / Cowork，再經由 Computer Use 操控瀏覽器與其他應用程式。</div>
 </div>
 
 <!-- =========================================== -->
