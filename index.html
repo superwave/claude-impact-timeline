@@ -1221,72 +1221,121 @@
 
 <div class="visual-callout">
   <div class="visual-title">Anthropic Agentic 架構 — 2/25 至 3/25，五個產品如何將手機與桌面串成一體</div>
-  <svg viewBox="0 0 1100 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;font-family:'Inter','Noto Sans TC',sans-serif;">
+  <svg viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;font-family:'Inter','Noto Sans TC',sans-serif;">
   <defs>
-    <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#888"/></marker>
+    <marker id="arch-ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="#888"/></marker>
+    <mask id="arch-mask" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="1200" height="600" fill="white"/>
+      <rect x="36" y="42" width="90" height="21" fill="black" rx="2"/>
+      <rect x="97" y="102" width="76" height="21" fill="black" rx="2"/>
+      <rect x="105" y="120" width="60" height="21" fill="black" rx="2"/>
+      <rect x="92" y="280" width="86" height="21" fill="black" rx="2"/>
+      <rect x="476" y="42" width="109" height="21" fill="black" rx="2"/>
+      <rect x="600" y="91" width="100" height="23" fill="black" rx="2"/>
+      <rect x="589" y="130" width="122" height="19" fill="black" rx="2"/>
+      <rect x="589" y="176" width="122" height="19" fill="black" rx="2"/>
+      <rect x="570" y="216" width="100" height="18" fill="black" rx="2"/>
+      <rect x="591" y="309" width="118" height="23" fill="black" rx="2"/>
+      <rect x="606" y="348" width="88" height="18" fill="black" rx="2"/>
+      <rect x="604" y="388" width="93" height="18" fill="black" rx="2"/>
+      <rect x="610" y="417" width="80" height="18" fill="black" rx="2"/>
+      <rect x="577" y="472" width="146" height="18" fill="black" rx="2"/>
+      <rect x="954" y="110" width="83" height="21" fill="black" rx="2"/>
+      <rect x="962" y="342" width="66" height="21" fill="black" rx="2"/>
+      <rect x="958" y="360" width="74" height="21" fill="black" rx="2"/>
+      <rect x="321" y="100" width="98" height="18" fill="black" rx="2"/>
+      <rect x="264" y="180" width="112" height="18" fill="black" rx="2"/>
+      <rect x="301" y="194" width="37" height="18" fill="black" rx="2"/>
+      <rect x="293" y="241" width="105" height="18" fill="black" rx="2"/>
+      <rect x="294" y="403" width="92" height="18" fill="black" rx="2"/>
+      <rect x="812" y="298" width="95" height="18" fill="black" rx="2"/>
+      <rect x="841" y="312" width="37" height="18" fill="black" rx="2"/>
+    </mask>
   </defs>
 
-  <!-- User's Mobile boundary -->
-  <rect x="20" y="40" width="240" height="440" rx="12" fill="none" stroke="#333" stroke-width="1"/>
-  <text x="40" y="70" font-size="13" font-weight="500" fill="#888">User's mobile</text>
+  <!-- User's Mobile -->
+  <rect x="20" y="30" width="240" height="540" rx="12" fill="none" stroke="#333" stroke-width="1"/>
+  <text x="40" y="58" font-size="13" font-weight="500" fill="#888">User's mobile</text>
 
-  <!-- Telegram/Discord box -->
-  <rect x="50" y="110" width="170" height="64" rx="8" fill="#1a1a24" stroke="#333" stroke-width="0.5"/>
-  <text x="135" y="140" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Telegram /</text>
-  <text x="135" y="160" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Discord</text>
+  <rect x="50" y="90" width="170" height="60" rx="8" fill="#1a1a24" stroke="#333" stroke-width="0.5"/>
+  <text x="135" y="118" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Telegram /</text>
+  <text x="135" y="136" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Discord</text>
 
-  <!-- Claude APP box -->
-  <rect x="50" y="260" width="170" height="64" rx="8" fill="#1a1a24" stroke="#333" stroke-width="0.5"/>
-  <text x="135" y="298" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Claude App</text>
+  <rect x="50" y="260" width="170" height="60" rx="8" fill="#1a1a24" stroke="#333" stroke-width="0.5"/>
+  <text x="135" y="296" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Claude App</text>
 
-  <!-- User's Computer boundary -->
-  <rect x="440" y="40" width="640" height="440" rx="12" fill="none" stroke="#333" stroke-width="1"/>
-  <text x="460" y="70" font-size="13" font-weight="500" fill="#888">User's computer</text>
+  <!-- User's Computer -->
+  <rect x="460" y="30" width="720" height="540" rx="12" fill="none" stroke="#333" stroke-width="1"/>
+  <text x="480" y="58" font-size="13" font-weight="500" fill="#888">User's computer</text>
 
-  <!-- Claude Code box -->
-  <rect x="510" y="100" width="200" height="100" rx="10" fill="#0f1e2e" stroke="#5b8def" stroke-width="1.5"/>
-  <text x="610" y="158" font-size="16" font-weight="600" fill="#85b7eb" text-anchor="middle">Claude Code</text>
+  <!-- Claude Code -->
+  <rect x="530" y="80" width="240" height="170" rx="10" fill="#0f1e2e" stroke="#5b8def" stroke-width="1.5"/>
+  <text x="650" y="108" font-size="15" font-weight="600" fill="#85b7eb" text-anchor="middle">Claude Code</text>
+  <!-- session 1 -->
+  <rect x="555" y="122" width="190" height="34" rx="6" fill="#111118" stroke="#3a6fa8" stroke-width="0.8"/>
+  <text x="650" y="144" font-size="12" fill="#6ba3d9" text-anchor="middle">claude code session</text>
+  <!-- session 2 (dashed) -->
+  <rect x="555" y="168" width="190" height="34" rx="6" fill="#111118" stroke="#3a6fa8" stroke-width="0.8" stroke-dasharray="5,3"/>
+  <text x="650" y="190" font-size="12" fill="#6ba3d9" text-anchor="middle">claude code session</text>
+  <!-- Auto Mode -->
+  <rect x="555" y="210" width="130" height="26" rx="6" fill="#111118" stroke="#e87b35" stroke-width="1.2"/>
+  <text x="620" y="228" font-size="10" font-weight="600" fill="#e87b35" text-anchor="middle">AUTO MODE (3/25)</text>
 
-  <!-- Auto Mode badge -->
-  <rect x="530" y="82" width="130" height="28" rx="6" fill="#111118" stroke="#e87b35" stroke-width="1.2"/>
-  <text x="595" y="101" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">AUTO MODE (3/25)</text>
+  <!-- Claude Cowork -->
+  <rect x="530" y="300" width="240" height="250" rx="10" fill="#0f2420" stroke="#5dcaa5" stroke-width="1.5"/>
+  <text x="650" y="326" font-size="15" font-weight="600" fill="#7bed9f" text-anchor="middle">Claude Cowork</text>
+  <!-- cowork session -->
+  <rect x="555" y="340" width="190" height="30" rx="6" fill="#111118" stroke="#3a8a6f" stroke-width="0.8"/>
+  <text x="650" y="360" font-size="11" fill="#4db88a" text-anchor="middle">cowork session</text>
+  <!-- Project -->
+  <rect x="555" y="382" width="190" height="68" rx="6" fill="#111118" stroke="#e87b35" stroke-width="1.2"/>
+  <text x="650" y="400" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">PROJECT (3/20)</text>
+  <rect x="570" y="410" width="160" height="28" rx="5" fill="#0f2420" stroke="#3a8a6f" stroke-width="0.6"/>
+  <text x="650" y="429" font-size="10" fill="#4db88a" text-anchor="middle">cowork session</text>
+  <!-- Dispatch persistent thread -->
+  <rect x="555" y="462" width="190" height="34" rx="6" fill="#111118" stroke="#3a8a6f" stroke-width="0.8"/>
+  <text x="650" y="484" font-size="11" fill="#4db88a" text-anchor="middle">dispatch persistent thread</text>
 
-  <!-- Claude Cowork box -->
-  <rect x="510" y="300" width="200" height="100" rx="10" fill="#0f2420" stroke="#5dcaa5" stroke-width="1.5"/>
-  <text x="610" y="358" font-size="16" font-weight="600" fill="#7bed9f" text-anchor="middle">Claude Cowork</text>
+  <!-- File System -->
+  <rect x="920" y="90" width="150" height="60" rx="8" fill="#1a1a24" stroke="#333" stroke-width="0.5"/>
+  <text x="995" y="126" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">File system</text>
 
-  <!-- Project badge -->
-  <rect x="560" y="390" width="120" height="28" rx="6" fill="#111118" stroke="#e87b35" stroke-width="1.2"/>
-  <text x="620" y="409" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">PROJECT (3/20)</text>
+  <!-- Browser -->
+  <rect x="920" y="330" width="150" height="60" rx="8" fill="#1a1a24" stroke="#333" stroke-width="0.5"/>
+  <text x="995" y="358" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Browser,</text>
+  <text x="995" y="376" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">other App</text>
 
-  <!-- Browser / other APP box -->
-  <rect x="870" y="190" width="170" height="80" rx="8" fill="#1a1a24" stroke="#333" stroke-width="0.5"/>
-  <text x="955" y="228" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">Browser,</text>
-  <text x="955" y="250" font-size="14" font-weight="500" fill="#ccc" text-anchor="middle">other App</text>
+  <!-- Arrows -->
+  <!-- Telegram → Code session: Channel -->
+  <line x1="220" y1="120" x2="550" y2="139" stroke="#888" stroke-width="1.5" marker-end="url(#arch-ah)"/>
+  <text x="370" y="112" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">CHANNEL (3/20)</text>
 
-  <!-- Arrow: Telegram → Code (Channel) -->
-  <line x1="220" y1="142" x2="505" y2="142" stroke="#888" stroke-width="1.5" marker-end="url(#ah)"/>
-  <text x="350" y="132" font-size="12" font-weight="600" fill="#e87b35" text-anchor="middle">CHANNEL (3/20)</text>
+  <!-- App → Code session: Remote Control -->
+  <line x1="220" y1="275" x2="550" y2="139" stroke="#888" stroke-width="1.5" marker-end="url(#arch-ah)" mask="url(#arch-mask)"/>
+  <text x="320" y="192" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">REMOTE CONTROL</text>
+  <text x="320" y="206" font-size="10" font-weight="600" fill="#e87b35" text-anchor="middle">(2/25)</text>
 
-  <!-- Arrow: Claude App → Code (Remote Control) -->
-  <line x1="220" y1="280" x2="505" y2="175" stroke="#888" stroke-width="1.5" marker-end="url(#ah)"/>
-  <text x="310" y="210" font-size="12" font-weight="600" fill="#e87b35" text-anchor="middle">REMOTE CONTROL (2/25)</text>
+  <!-- App → Code session 2 (dashed): RC new session -->
+  <line x1="220" y1="290" x2="550" y2="185" stroke="#888" stroke-width="1.2" stroke-dasharray="6,3" marker-end="url(#arch-ah)" mask="url(#arch-mask)"/>
+  <text x="345" y="253" font-size="10" font-weight="500" fill="#e87b35" text-anchor="middle">RC: add new session</text>
 
-  <!-- Arrow: Claude App → Cowork (Dispatch) -->
-  <line x1="220" y1="305" x2="505" y2="345" stroke="#888" stroke-width="1.5" marker-end="url(#ah)"/>
-  <text x="330" y="345" font-size="12" font-weight="600" fill="#e87b35" text-anchor="middle">DISPATCH (3/17)</text>
+  <!-- App → Dispatch thread -->
+  <line x1="220" y1="305" x2="550" y2="479" stroke="#888" stroke-width="1.5" marker-end="url(#arch-ah)"/>
+  <text x="340" y="415" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">DISPATCH (3/17)</text>
 
-  <!-- Computer Use: Code → junction point -->
-  <line x1="710" y1="170" x2="770" y2="230" stroke="#888" stroke-width="1.5"/>
-  <!-- Computer Use: Cowork → junction point -->
-  <line x1="710" y1="330" x2="770" y2="230" stroke="#888" stroke-width="1.5"/>
-  <!-- Computer Use: junction → Browser -->
-  <line x1="770" y1="230" x2="865" y2="230" stroke="#888" stroke-width="1.5" marker-end="url(#ah)"/>
-  <!-- Computer Use label -->
-  <text x="818" y="218" font-size="12" font-weight="600" fill="#e87b35" text-anchor="middle">COMPUTER USE</text>
-  <text x="818" y="253" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">(3/24)</text>
+  <!-- Code → File System -->
+  <line x1="770" y1="140" x2="915" y2="120" stroke="#888" stroke-width="1.2" marker-end="url(#arch-ah)"/>
+
+  <!-- Computer Use: Code + Cowork → Browser -->
+  <line x1="770" y1="200" x2="840" y2="340" stroke="#888" stroke-width="1.5" mask="url(#arch-mask)"/>
+  <line x1="770" y1="380" x2="840" y2="340" stroke="#888" stroke-width="1.5"/>
+  <line x1="840" y1="340" x2="915" y2="355" stroke="#888" stroke-width="1.5" marker-end="url(#arch-ah)"/>
+  <text x="860" y="310" font-size="11" font-weight="600" fill="#e87b35" text-anchor="middle">COMPUTER USE</text>
+  <text x="860" y="324" font-size="10" font-weight="600" fill="#e87b35" text-anchor="middle">(3/24)</text>
+
+  <!-- Cowork → File System (dashed) -->
+  <line x1="770" y1="350" x2="915" y2="140" stroke="#888" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arch-ah)"/>
   </svg>
-  <div class="visual-caption">架構圖：使用者從手機端透過三條路徑（Remote Control、Dispatch、Channel）觸發桌面端的 Claude Code / Cowork，再經由 Computer Use 操控瀏覽器與其他應用程式。</div>
+  <div class="visual-caption">架構圖：手機端三條路徑（Remote Control、Dispatch、Channel）觸發桌面端 Claude Code / Cowork。Code 直接操作 File System；兩者皆可透過 Computer Use 操控瀏覽器與其他應用。Cowork 內部展示 Project 持久工作空間與 Dispatch 常駐 thread。</div>
 </div>
 
 <!-- =========================================== -->
