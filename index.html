@@ -536,6 +536,7 @@
   <a href="#pentagon" class="impact-link">Pentagon</a>
   <a href="#phase5">新格局</a>
   <a href="#channels">Channels</a>
+  <a href="#computer-use">操控電腦</a>
   <span class="toc-sep">|</span>
   <a href="#chart">圖表</a>
   <a href="#stockchart">股價</a>
@@ -545,9 +546,9 @@
 <div class="hero">
   <h1>Anthropic 衝擊波時間軸</h1>
   <p class="subtitle">
-    2026 年 1-3 月，Anthropic 以每週一次的節奏連續釋出 Cowork、Plugins、Opus 4.6、Claude Code Security、COBOL 現代化，
+    2026 年 1-3 月，Anthropic 以每週一次的節奏連續釋出 Cowork、Plugins、Opus 4.6、Claude Code Security、COBOL 現代化、Computer Use，
     引發軟體產業自 2000 年以來最密集的股價震盪——媒體稱之為「SaaSocalypse」。
-    同時因堅守 AI 安全紅線與 Pentagon 爆發史無前例的憲政對峙。
+    同時因堅守 AI 安全紅線與 Pentagon 爆發史無前例的憲政對峙，AI 從聊天工具進化為直接操控電腦的 agent。
   </p>
   <div class="stat-row">
     <div class="stat">
@@ -563,7 +564,7 @@
       <div class="label">受衝擊 / 預警產業</div>
     </div>
     <div class="stat">
-      <div class="number">11 週</div>
+      <div class="number">12 週</div>
       <div class="label">衝擊期間</div>
     </div>
   </div>
@@ -972,6 +973,17 @@
     </div>
   </div>
 
+  <div class="event">
+    <div class="dot anthropic-official"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 2 月 25 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Claude Code Remote Control — 手機直連本機開發環境</h3>
+      <div class="description">與 Amodei 穩市同日，Anthropic 釋出 Claude Code Remote Control（Research Preview）。開發者從手機、平板或任意瀏覽器即可接入本地端 Claude Code session——不同於雲端版，所有運算都在使用者的電腦上執行。技術上，本地 session 只做出站 HTTPS 請求（不開放入站 port），透過 Anthropic API 以 TLS 串流輪詢指令，使用多組短效一次性憑證。每個 session 限一個遠端連線，終端機須保持開啟，網路中斷約 10 分鐘後逾時。意義：Claude Code 從「綁在桌面前」解放為「隨身攜帶」，為一週後的 Dispatch 和三週後的 Channels 鋪路——Anthropic 正系統性地將 AI agent 從固定工具進化為隨時可及的開發夥伴。</div>
+      <div class="source-link">來源：<a href="https://venturebeat.com/orchestration/anthropic-just-released-a-mobile-version-of-claude-code-called-remote" target="_blank">VentureBeat</a>, <a href="https://www.helpnetsecurity.com/2026/02/25/anthropic-remote-control-claude-code-feature/" target="_blank">Help Net Security</a>, <a href="https://www.techradar.com/pro/anthropic-reveals-remote-control-a-mobile-version-of-claude-code-to-keep-you-productive-on-the-move" target="_blank">TechRadar</a></div>
+    </div>
+  </div>
+
 </div>
 
 <div class="quote-callout">
@@ -986,7 +998,7 @@
 
   <div class="phase-label">
     <h2>Phase 5 — 餘波、對峙與新格局（2026.03）</h2>
-    <p>微軟擁抱 Claude、Pentagon 封殺引爆憲政危機、Dispatch 與 Channels 讓 AI 變身永遠待命的同事——「Claude Effect」從股市術語變成產業常態</p>
+    <p>微軟擁抱 Claude、Pentagon 封殺引爆憲政危機、Remote Control → Dispatch → Channels → Computer Use 四步驟讓 AI 直接操控你的電腦——「Claude Effect」從股市術語變成產業常態</p>
   </div>
 
   <div class="event">
@@ -1008,6 +1020,17 @@
       <h3>Microsoft Copilot Cowork — Claude 進入 M365 生態系</h3>
       <div class="description">Microsoft 宣布 Copilot Cowork，將 Anthropic Claude 整合進 Microsoft 365。Claude 現在可以跨 Outlook、Teams、Excel 等應用程式同時操作——排程會議、生成簡報文件、分析跨系統資料。這代表 SaaS 巨頭的策略轉向：與其被 AI 取代，不如將 AI 嵌入自己的平台。同時推出新的 E7 授權方案。Microsoft 自 Cowork 發佈以來股價已跌 14%，但市場視此合作為正面訊號。</div>
       <div class="source-link">來源：<a href="https://fortune.com/2026/03/09/microsoft-copilot-cowork-ai-agents-anthropic-e7-m365-saas/" target="_blank">Fortune</a>, <a href="https://venturebeat.com/orchestration/microsoft-announces-copilot-cowork-with-help-from-anthropic-a-cloud-powered" target="_blank">VentureBeat</a></div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="dot anthropic-official"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 3 月 9 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Claude Code Review — 多 Agent 自動程式碼審查</h3>
+      <div class="description">Anthropic 推出 Claude Code Review，派出一組平行 agent 團隊審查 Pull Request——各 agent 從不同角度檢查（邏輯錯誤、安全漏洞、效能瓶頸），交叉驗證後消除誤報，按嚴重程度標記（紅=關鍵、黃=需留意、紫=歷史遺留）。整合 GitHub，自動留下總覽評論與行內註解。效能數據：84% 的 1000+ 行 PR 會收到發現（平均 7.5 個問題），工程師標記為錯誤的發現不到 1%。Anthropic 內部實測後，PR 中有實質性審查評論的比例從 16% 躍升至 54%。定價：每次審查 $15-25，依 PR 大小浮動，可設月度上限。針對 AI 生成程式碼爆量的時代，用 AI 審查 AI 寫的程式碼。</div>
+      <div class="source-link">來源：<a href="https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/" target="_blank">TechCrunch</a>, <a href="https://claude.com/blog/code-review" target="_blank">Anthropic 官方</a>, <a href="https://venturebeat.com/technology/anthropic-rolls-out-code-review-for-claude-code-as-it-sues-over-pentagon" target="_blank">VentureBeat</a></div>
     </div>
   </div>
 
@@ -1115,6 +1138,60 @@
       <h3>Claude Code Channels — 透過 Telegram/Discord 遙控 AI 寫程式，「OpenClaw 殺手」</h3>
       <div class="description">Anthropic 釋出 Claude Code Channels（需 v2.1.80+），讓開發者透過 Telegram、Discord 等即時通訊 app 直接與 Claude Code 對話——從手機下達指令，Claude 在桌面端自動執行程式碼、跑測試、修 bug，完成後回傳結果。技術架構：MCP server 作為雙向橋接，使用 --channels flag 啟動後，Claude Code session 變為長駐 polling service，接收 &lt;channel&gt; 事件並執行。VentureBeat 稱其為「OpenClaw 殺手」——同樣是非同步 AI agent 模式，但走封閉安全路線。這代表從「同步問答」到「非同步自主夥伴」的典範轉移：Claude Code 不再是你去找的工具，而是一個永遠待命、隨時可喚醒的開發搭檔。同時附帶 Fakechat 本機測試 UI，反映 Anthropic 一貫的 research preview 謹慎策略。需 Bun runtime 環境，目前支援 Mac/PC。</div>
       <div class="source-link">來源：<a href="https://venturebeat.com/orchestration/anthropic-just-shipped-an-openclaw-killer-called-claude-code-channels" target="_blank">VentureBeat</a>, <a href="https://www.newsbytesapp.com/news/science/anthropic-launches-claude-code-channels-to-rival-openclaws/story" target="_blank">NewsBytes</a>, <a href="https://releasebot.io/updates/anthropic/claude-code" target="_blank">Releasebot</a></div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="dot anthropic-official"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 3 月 20 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Claude Cowork Projects — 持久化工作空間</h3>
+      <div class="description">Cowork 推出 Projects 功能，讓使用者將檔案、指令、任務上下文組織到持久工作空間中——掛載本地資料夾、跨 session 延續上下文、整合排程任務。可從零開始、匯入現有對話、或連結本地資料夾。意義：Cowork 從「一次性聊天」進化為「持久工作台」，配合排程任務（3/17）與 Channels（同日），Anthropic 正將 Claude 從對話工具轉型為知識工作者的長期搭檔。</div>
+      <div class="source-link">來源：<a href="https://cybersecuritynews.com/projects-feature-claude-cowork-desktop/" target="_blank">CybersecurityNews</a>, <a href="https://mlq.ai/news/anthropic-rolls-out-projects-feature-for-claude-cowork-desktop/" target="_blank">MLQ.ai</a></div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="dot release"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 3 月 11-20 日 — 產品更新浪潮</div>
+      <h3>10 天內 8 項功能密集釋出 — Anthropic 的「閃電戰」節奏</h3>
+      <div class="description">
+        Anthropic 在 3 月中旬以罕見密度連續釋出功能更新：<br>
+        <strong>3/12</strong> Charts &amp; Visuals — 對話中直接生成互動式圖表與視覺化，以 HTML 渲染（非靜態圖片），所有方案可用<br>
+        <strong>3/13</strong> 2x Usage Promo — 離峰時段用量加倍（至 3/28），Free/Pro/Max/Team 全適用<br>
+        <strong>3/14</strong> Excel &amp; PPT Skills — 跨應用共享 context，新增可重複使用的 Skills 工作流，支援 Amazon Bedrock / Vertex AI / Foundry LLM gateway<br>
+        <strong>3/17</strong> Cowork 排程任務 — /schedule 指令設定定期或一次性自動任務（晨會簡報、週報、簡報生成），電腦喚醒時自動補跑<br>
+        <strong>3/20</strong> Code Review 正式開放 — 多 agent PR 審查，$15-25/次<br>
+        <strong>3/20</strong> MCP Elicitation — MCP server 可在任務執行中向使用者請求結構化輸入（表單式 UI），新增 Elicitation hooks<br>
+        <strong>3/20</strong> Channels 權限中繼 — Channel 轉發審批通知到手機，遠端確認破壞性操作<br>
+        <strong>3/25</strong> --bare flag — 腳本化呼叫跳過 hooks/LSP/plugin sync，CI/CD 專用的確定性執行模式
+      </div>
+      <div class="source-link">來源：<a href="https://claude.com/blog/claude-builds-visuals" target="_blank">Anthropic Blog (Visuals)</a>, <a href="https://support.claude.com/en/articles/14063676-claude-march-2026-usage-promotion" target="_blank">Claude Help (2x)</a>, <a href="https://venturebeat.com/orchestration/anthropic-gives-claude-shared-context-across-microsoft-excel-and-powerpoint" target="_blank">VentureBeat (Excel)</a>, <a href="https://code.claude.com/docs/en/changelog" target="_blank">Claude Code Changelog</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="computer-use">
+    <div class="dot anthropic-official"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 3 月 24 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Computer Use — Claude 直接操作你的電腦</h3>
+      <div class="description">Anthropic 最大膽的 agent 功能登場：Claude 可在 macOS 上直接開啟檔案、使用瀏覽器、操作開發工具——不需任何特殊設定。架構策略：優先使用原生 connector（Google Workspace、Slack 等），沒有 connector 時才回退到螢幕級操作（指、點、導航）。搭配前一週推出的 Dispatch，使用者可從 iPhone 遠端交付任務，Claude 在桌面上自主完成。安全設計：存取新應用程式前必須取得人類許可。CNBC 稱其為「Anthropic 最大膽的 AI agent 推進」。Pro 與 Max 訂閱用戶可用（macOS Research Preview）。同日 Pentagon 聽證會舉行，Anthropic 在法庭攻防與產品攻勢雙線推進。</div>
+      <div class="source-link">來源：<a href="https://www.cnbc.com/2026/03/24/anthropic-claude-ai-agent-use-computer-finish-tasks.html" target="_blank">CNBC</a>, <a href="https://www.engadget.com/ai/claude-code-and-cowork-can-now-use-your-computer-210000126.html" target="_blank">Engadget</a>, <a href="https://www.macrumors.com/2026/03/24/claude-use-mac-remotely-iphone/" target="_blank">MacRumors</a>, <a href="https://9to5mac.com/2026/03/23/anthropic-is-giving-claude-the-ability-to-use-your-mac-for-you/" target="_blank">9to5Mac</a></div>
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="dot anthropic-official"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 3 月 25 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Claude Code Auto Mode — 在「全自動」與「逐步確認」之間找到平衡</h3>
+      <div class="description">Claude Code 新增 Auto Mode，解決開發者長期痛點：預設模式每次寫入/執行都要人工確認太慢，--dangerously-skip-permissions 又太危險。Auto Mode 讓 AI 分類器在每次 tool call 前即時檢查——偵測大量檔案刪除、資料外洩、惡意程式碼執行與 prompt injection，安全操作自動放行，危險操作仍攔截確認。支援 Sonnet 4.6 與 Opus 4.6。TechCrunch：「Anthropic 給了 Claude Code 更多控制權，但沒拿掉韁繩。」SiliconANGLE：「Anthropic unchains Claude Code。」建議在沙箱環境使用。Teams 方案即日可用，Enterprise 與 API 隨後跟進。</div>
+      <div class="source-link">來源：<a href="https://techcrunch.com/2026/03/24/anthropic-hands-claude-code-more-control-but-keeps-it-on-a-leash/" target="_blank">TechCrunch</a>, <a href="https://siliconangle.com/2026/03/24/anthropic-unchains-claude-code-auto-mode-allowing-choose-permissions/" target="_blank">SiliconANGLE</a>, <a href="https://9to5mac.com/2026/03/24/claude-code-gives-developers-auto-mode-a-safer-alternative-to-skipping-permissions/" target="_blank">9to5Mac</a></div>
     </div>
   </div>
 
