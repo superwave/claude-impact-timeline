@@ -1999,6 +1999,8 @@ document.addEventListener('DOMContentLoaded', () => {
       e12: ev('2026-03-09', 'Microsoft Copilot Cowork 合作', '#5b8def', 0),
       e13: ev('2026-03-17', 'Claude Dispatch + SAIL 暴跌', '#ff6b6b', 18),
       e14: ev('2026-03-20', 'Claude Code Channels 發佈',   '#f0a060', 0),
+      e15: ev('2026-03-26', 'Mythos 洩露 + 禁制令',       '#ff4444', 18),
+      e16: ev('2026-03-27', 'Mythos Meltdown 資安閃崩',   '#ff4444', 0),
       baseline: {
         type: 'line', yMin: 100, yMax: 100,
         borderColor: '#555', borderWidth: 1, borderDash: [4, 4],
@@ -2007,10 +2009,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // On mobile, hide annotation text labels (keep vertical lines)
+    // On mobile, shrink annotation text labels and rotate for readability
     if (isMobile) {
       Object.values(annotations).forEach(a => {
-        if (a.label && a.label.display) a.label.display = false;
+        if (a.label && a.label.display) {
+          a.label.font = { size: 7, weight: 'bold', family: "'Inter','Noto Sans TC',sans-serif" };
+          a.label.padding = { top: 2, bottom: 2, left: 4, right: 4 };
+          a.label.rotation = -90;
+        }
       });
     }
 
@@ -2026,7 +2032,7 @@ document.addEventListener('DOMContentLoaded', () => {
           x: {
             type: 'time',
             time: { unit: 'month', displayFormats: { month: 'yyyy/MM', week: 'MM/dd' }, tooltipFormat: 'yyyy/MM/dd' },
-            min: '2026-01-01', max: '2026-03-20',
+            min: '2026-01-01', max: '2026-03-28',
             grid: { color: '#1e1e28', drawTicks: false },
             ticks: { color: '#666', font: { size: isMobile ? 9 : 11 }, maxRotation: 0, autoSkip: true, maxTicksLimit: isMobile ? 4 : 30 },
             border: { color: '#333' }
