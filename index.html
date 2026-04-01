@@ -559,6 +559,7 @@
   <a href="#phase5">新格局</a>
   <a href="#channels">Channels</a>
   <a href="#computer-use">操控電腦</a>
+  <a href="#code-leak" class="impact-link">Code 外洩</a>
   <span class="toc-sep">|</span>
   <a href="#chart">圖表</a>
   <a href="#stockchart">股價</a>
@@ -571,6 +572,7 @@
     2026 年 1-3 月，Anthropic 以每週一次的節奏連續釋出 Cowork、Plugins、Opus 4.6、Claude Code Security、COBOL 現代化、Computer Use，
     引發軟體產業自 2000 年以來最密集的股價震盪——媒體稱之為「SaaSocalypse」。
     同時因堅守 AI 安全紅線與 Pentagon 爆發史無前例的憲政對峙，AI 從聊天工具進化為直接操控電腦的 agent。
+    3 月底更接連爆發 Claude Code 原始碼外洩、供應鏈攻擊與配額風暴——在 IPO 倒數計時之際掀起新一輪信任危機。
   </p>
   <div class="stat-row">
     <div class="stat">
@@ -1403,6 +1405,50 @@
     </div>
   </div>
 
+  <div class="event" id="ipo-update">
+    <div class="dot partner"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge partner-badge">2026 年 3 月 30 日</div>
+      <h3>Anthropic IPO 時間表更明確 — 目標 10 月上市、三大投行競爭承銷</h3>
+      <div class="description">繼 3/27 The Information 首次披露後，Winbuzzer 與 Investing.com 在 3/30 報導更多細節：Goldman Sachs、JPMorgan Chase 與 Morgan Stanley 已正式進入承銷角色爭奪戰，Wilson Sonsini 擔任 IPO 法律顧問。若成功，將是 SpaceX 之後史上第二大 IPO。Anthropic 年化收入已從 2025 年底的 $90 億飆升至 2026 年 3 月的 $190 億，每募資 $1 美元產生 $0.23 年經常性收入——是 OpenAI 的兩倍。然而會計處理方式（雲端運算點數以總額法入帳）可能成為 SEC 審查的焦點。OpenAI 董事會據報擔憂若 Anthropic 搶先上市，將吸走散戶投資人對 AI 的配置需求。</div>
+      <div class="source-link">來源：<a href="https://winbuzzer.com/2026/03/30/anthropic-ipo-q4-2026-60-billion-target-xcxwbn/" target="_blank">Winbuzzer</a>, <a href="https://www.investing.com/news/stock-market-news/anthropic-considers-ipo-as-soon-as-q4-2026-the-information-4584016" target="_blank">Investing.com</a>, <a href="https://forgeglobal.com/insights/anthropic-upcoming-ipo-news/" target="_blank">Forge</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="code-leak">
+    <div class="dot impact"></div>
+    <div class="card" style="border-color: rgba(255,68,68,0.3);">
+      <div class="connector"></div>
+      <div class="date-badge impact-badge">2026 年 3 月 31 日 — Code Leak</div>
+      <h3>Claude Code 原始碼全面外洩 — 512K 行程式碼曝光 KAIROS 自主模式</h3>
+      <div class="description">Anthropic 因 npm 套件打包錯誤，意外將 Claude Code v2.1.88 的完整原始碼（59.8MB source map、約 1,900 個 TypeScript 檔案、512,000+ 行程式碼）發佈到公開 npm registry。安全研究員 Chaofan Shou 率先公開披露。洩露內容涵蓋 LLM API 編排、多 agent 協調、權限邏輯、OAuth 流程，以及 44 個未公開 feature flag。最引人注目的是 <strong>KAIROS</strong>（希臘文「在正確的時間」），一個被提及 150+ 次的自主背景代理模式——包含 autoDream 記憶固化機制，讓 Claude 在用戶閒置時自動整理觀察、消除矛盾、將模糊洞察轉為事實。其他曝光功能包括多 agent「swarms」系統、JWT IDE 橋接、以及 Buddy（一個塔麻可吉風格的 AI 寵物）。更具爭議的是「Undercover Mode」——指示 agent 在開源 repo 中清除所有 AI 痕跡。DMCA 下架完全無效，GitHub 備份被 fork 41,500+ 次，鏡像迅速擴散至去中心化平台。Anthropic 稱「無敏感客戶資料外洩」，歸因於「人為的打包錯誤」。這是 Anthropic 第三次意外發佈 npm source map。</div>
+      <div class="source-link">來源：<a href="https://venturebeat.com/technology/claude-codes-source-code-appears-to-have-leaked-heres-what-we-know" target="_blank">VentureBeat</a>, <a href="https://www.cnbc.com/2026/03/31/anthropic-leak-claude-code-internal-source.html" target="_blank">CNBC</a>, <a href="https://gizmodo.com/source-code-for-anthropics-claude-code-leaks-at-the-exact-wrong-time-2000740379" target="_blank">Gizmodo</a>, <a href="https://decrypt.co/362917/anthropic-accidentally-leaked-claude-code-source-internet-keeping-forever" target="_blank">Decrypt</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="supply-chain">
+    <div class="dot impact"></div>
+    <div class="card" style="border-color: rgba(255,68,68,0.3);">
+      <div class="connector"></div>
+      <div class="date-badge impact-badge">2026 年 3 月 31 日 — Supply Chain Attack</div>
+      <h3>axios npm 供應鏈攻擊 — Claude Code 用戶遭 RAT 木馬波及</h3>
+      <div class="description">與 Claude Code 原始碼外洩同日，axios npm 套件遭受供應鏈攻擊。在 UTC 3/31 00:21 至 03:29 之間透過 npm 安裝或更新 Claude Code 的用戶，可能拉取到含有遠端存取木馬 (RAT) 的惡意 axios 版本。事件的時間巧合令資安社群高度警覺——Anthropic 連續遭遇 Mythos 資料外洩（3/26）、Code 原始碼外洩（3/31）與供應鏈攻擊的「三重打擊」，對其年化收入 $190 億、即將 IPO 的企業形象構成嚴峻考驗。</div>
+      <div class="source-link">來源：<a href="https://cybersecuritynews.com/claude-code-source-code-leaked/" target="_blank">CyberSecurityNews</a>, <a href="https://venturebeat.com/technology/claude-codes-source-code-appears-to-have-leaked-heres-what-we-know" target="_blank">VentureBeat</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="quota-storm">
+    <div class="dot impact"></div>
+    <div class="card" style="border-color: rgba(255,68,68,0.3);">
+      <div class="connector"></div>
+      <div class="date-badge impact-badge">2026 年 3 月 31 日 — Quota Storm</div>
+      <h3>Claude Code 配額風暴 — Max 用戶 1 小時耗盡額度、Anthropic 承認問題</h3>
+      <div class="description">Anthropic 公開承認用戶消耗 Claude Code 配額「遠超預期」。Reddit、GitHub 論壇湧入大量投訴：Max 5 用戶（$100/月）反映 1 小時就耗盡原本可用 8 小時的額度；Max 20x 用戶則報告單一 prompt 導致使用率從 21% 直接跳至 100%。根因涉及三重疊加：Anthropic 在平日尖峰時段（太平洋時間 5am-11am）刻意限縮五小時配額窗口、已確認的計量器去同步 bug、以及 3 月 2x 離峰優惠結束。影響約 7% 用戶。Anthropic 未公開具體限額數字，缺乏透明度引發社群強烈不滿，多名用戶表示正在評估退款與取消訂閱。分析師指出，隨著 vibe-coding 與 Computer Use 等 agentic 功能興起，所有 AI 供應商都面臨固定月費制與 token 爆量消耗之間的結構性矛盾。</div>
+      <div class="source-link">來源：<a href="https://www.theregister.com/2026/03/31/anthropic_claude_code_limits/" target="_blank">The Register</a>, <a href="https://www.macrumors.com/2026/03/26/claude-code-users-rapid-rate-limit-drain-bug/" target="_blank">MacRumors</a>, <a href="https://www.infoworld.com/article/4151196/anthropic-throttles-claude-subscriptions-to-meet-capacity.html" target="_blank">InfoWorld</a></div>
+    </div>
+  </div>
+
 </div>
 
 <!-- =========================================== -->
@@ -1410,7 +1456,7 @@
 <!-- =========================================== -->
 <div class="phase-label" style="margin-top: 20px;">
   <h2>受衝擊產業總覽</h2>
-  <p>九大產業 / 領域在 2026 年 1-3 月遭受不同程度的「Anthropic 衝擊波」</p>
+  <p>十大產業 / 領域在 2026 年 1-3 月遭受不同程度的「Anthropic 衝擊波」</p>
 </div>
 
 <div class="sector-grid">
