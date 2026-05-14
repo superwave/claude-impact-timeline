@@ -608,7 +608,7 @@
 <div class="stock-chart-section" id="stockchart">
   <div class="phase-label">
     <h2>股價走勢 — Anthropic 衝擊全景圖</h2>
-    <p>2026 年 1-3 月，14 支受影響個股及指數的相對價格走勢（點擊圖例可切換顯示，更新至 3/27）</p>
+    <p>2026 年 1-5 月，15 支受影響個股及指數的相對價格走勢（點擊圖例可切換顯示，更新至 5/14）</p>
   </div>
 
   <div class="stock-chart-wrap">
@@ -1452,11 +1452,177 @@
 </div>
 
 <!-- =========================================== -->
+<!-- PHASE 6 — IPO 倒數與基礎設施軍備賽（2026.04-05） -->
+<!-- =========================================== -->
+<div class="timeline-container" id="phase6">
+
+  <div class="phase-label">
+    <h2>Phase 6 — IPO 倒數與基礎設施軍備賽（2026.04-05）</h2>
+    <p>Mythos 釋出引爆網安股雙向震盪、Amazon 加碼 $250 億、Pentagon 上訴敗訴、Blackstone/Goldman 合資打進顧問業、Code with Claude 大會推出 Dreaming，年化收入飆破 $300 億——Q4 IPO 鐘聲正逼近</p>
+  </div>
+
+  <div class="event" id="mythos-glasswing">
+    <div class="dot release"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 4 月 7 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Project Glasswing + Claude Mythos Preview — AI 自主挖掘上千個零日漏洞</h3>
+      <div class="description">Anthropic 同日發表兩件大事：(1) Claude Mythos Preview——資安能力極強的下一代模型，過去數週已在主要作業系統與瀏覽器中自主發現「數千個零日漏洞」，包括一個 17 年歷史的 FreeBSD NFS RCE（CVE-2026-4747），全程無人介入。(2) Project Glasswing——$1 億美元防禦倡議，封閉合作對象包括 AWS、Apple、Broadcom、Cisco、CrowdStrike、Google、JPMorgan Chase、Linux Foundation、Microsoft、NVIDIA、Palo Alto Networks。Mozilla 隨後揭露 Mythos 已協助 Firefox 修補 271 個漏洞。Anthropic 因攻擊能力過強拒絕公開釋出該模型，僅以「Cyber Verification Program」開放給合格機構。3 月底，Anthropic 內部一個未受保護的資料快取意外曝光「Capybara」（Mythos 代號）草稿部落格文章——市場連鎖反應使 CrowdStrike 一度跌 7.5%、Palo Alto Networks 跌逾 6%、Zscaler/Okta 介於 5-8%。</div>
+      <div class="source-link">來源：<a href="https://www.anthropic.com/glasswing" target="_blank">Anthropic 官方 (Glasswing)</a>, <a href="https://red.anthropic.com/2026/mythos-preview/" target="_blank">red.anthropic.com</a>, <a href="https://www.cnbc.com/2026/04/07/anthropic-claude-mythos-ai-hackers-cyberattacks.html" target="_blank">CNBC</a>, <a href="https://www.schneier.com/blog/archives/2026/04/on-anthropics-mythos-preview-and-project-glasswing.html" target="_blank">Schneier on Security</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="pentagon-appeal">
+    <div class="dot impact"></div>
+    <div class="card" style="border-color: rgba(255,68,68,0.3);">
+      <div class="connector"></div>
+      <div class="date-badge impact-badge">2026 年 4 月 8 日 — Pentagon 戰局逆轉</div>
+      <h3>DC 上訴法院駁回 Anthropic 暫緩執行請求 — 國防部黑名單恢復</h3>
+      <div class="description">3/26 加州聯邦法官 Rita Lin 以「First Amendment retaliation」為由發出 preliminary injunction 暫停 Pentagon 對 Anthropic 的供應鏈風險認定，但僅兩週後形勢逆轉。華府 DC 巡迴上訴法院裁定：「衡平天秤偏向政府……一邊是單一私人公司有限的財務損失，另一邊是戰時國防部如何與透過誰取得關鍵 AI 技術的司法管理。」拒絕 Anthropic 暫緩請求。此後 Anthropic 雖可繼續服務其他聯邦機構，但無法投標 DOD 合約。CFO 先前估計年損失「數億至數十億美元」。本案進入完整實質審理階段，預計成為定義 AI 公司與國家安全邊界的指標性判決。</div>
+      <div class="source-link">來源：<a href="https://www.cnbc.com/2026/04/08/anthropic-pentagon-court-ruling-supply-chain-risk.html" target="_blank">CNBC</a>, <a href="https://www.axios.com/2026/04/08/anthropic-loses-bid-to-block-pentagon-blacklisting" target="_blank">Axios</a>, <a href="https://siliconangle.com/2026/04/08/appeals-court-rejects-anthropics-bid-block-pentagon-blacklisting/" target="_blank">SiliconANGLE</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="cowork-ga">
+    <div class="dot release"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 4 月 9 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Claude Cowork 正式 GA — 從 research preview 畢業、原生支援企業治理</h3>
+      <div class="description">Cowork 與 Claude Code on Desktop 同日進入 General Availability，所有付費方案（Pro/Team/Enterprise）的 macOS/Windows 用戶皆可使用。同步推出六項企業級功能：RBAC（角色式存取控制）、群組支出上限、Analytics API、Zoom MCP 整合，以及業界首見的「desktop agent 原生 OpenTelemetry 支援」——所有 Cowork 活動日誌可即時匯出至 Splunk、Datadog、Elastic 等 SIEM 工具。一月以來的 11 個官方商業 plugin（Sales、Marketing、Legal、Finance、Data）全面整合進 GA 版本。標誌 Anthropic 從研究實驗品全面進入企業正式採購清單。</div>
+      <div class="source-link">來源：<a href="https://www.testingcatalog.com/anthropic-launches-claude-cowork-in-general-availability/" target="_blank">TestingCatalog</a>, <a href="https://thenewstack.io/anthropic-takes-claude-cowork-out-of-preview-and-straight-into-the-enterprise/" target="_blank">The New Stack</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="opus-4-7">
+    <div class="dot release"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 4 月 16 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Claude Opus 4.7 發佈 — 視覺解析度大躍進、新增 xhigh effort 與 /ultrareview</h3>
+      <div class="description">旗艦模型升級至 Opus 4.7，定價不變（$5 / $25 per million tokens）。重點：(1) 進階軟體工程能力顯著提升，最難任務上獲得最大增益；(2) 視覺能力大幅躍進——可處理長邊 2,576 像素（約 3.75 megapixels）的高解析度影像，特別適合化學結構圖、技術圖表辨識；(3) 新增 xhigh effort 等級，提供推理與延遲的精細調控；(4) Claude Code 新增 /ultrareview slash command 進行專屬程式碼審查；(5) Max 用戶 auto mode 延長；(6) Task Budgets 進入 Claude Platform public beta。同步上架 Amazon Bedrock、Google Cloud Vertex AI、Microsoft Foundry。Tokenizer 更新可能增加 1.0–1.35 倍 token 用量。</div>
+      <div class="source-link">來源：<a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank">Anthropic 官方</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="claude-design">
+    <div class="dot release"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 4 月 17 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Claude Design — 由 Anthropic Labs 推出的視覺生成實驗產品</h3>
+      <div class="description">Anthropic Labs 推出 Claude Design，協助創辦人、PM 等無設計背景者快速產出 prototype、簡報、one-pager 與 mockup。一句話描述即可生成可編輯的視覺資產，再透過自然語言精煉。目標族群明確：「需要展示構想、但設計不是核心專長的人」。產品定位為實驗性，與 Figma、Canva 形成正面競爭，預示 Anthropic 將「設計工作流」也納入垂直整合範疇。</div>
+      <div class="source-link">來源：<a href="https://techcrunch.com/2026/04/17/anthropic-launches-claude-design-a-new-product-for-creating-quick-visuals/" target="_blank">TechCrunch</a>, <a href="https://www.macrumors.com/2026/04/17/anthropic-claude-design/" target="_blank">MacRumors</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="amazon-25b">
+    <div class="dot partner"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge partner-badge">2026 年 4 月 20 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Amazon 再加碼 $250 億 + 5GW Trainium 算力 + $1,000 億 AWS 承諾</h3>
+      <div class="description">Amazon 與 Anthropic 宣布巨額擴大合作：Amazon 額外投資最高 $250 億（首期 $50 億、其餘綁定里程碑），Anthropic 承諾未來 10 年內向 AWS 採購逾 $1,000 億技術服務，雙方部署最高 5GW 新 Trainium 算力（相當於 5 座大型核電廠）供 Claude 訓練與服務。涵蓋 Trainium2/3/4 及後續世代客製矽晶片，加上「數千萬顆」Graviton CPU 核心。Trainium3 將於 2026 年底前上線約 1GW。同步推出 Claude Platform on AWS——客戶可透過既有 AWS 帳號、計費與安全控制直接存取完整 Claude 平台（超越 Bedrock marketplace 的整合層級）。此一交易與同期 Google/Broadcom 5GW + SpaceX Colossus 1 等多元化布局並行，凸顯 Anthropic 對抗算力瓶頸的全面戰略。</div>
+      <div class="source-link">來源：<a href="https://www.anthropic.com/news/anthropic-amazon-compute" target="_blank">Anthropic 官方</a>, <a href="https://www.cnbc.com/2026/04/20/amazon-invest-up-to-25-billion-in-anthropic-part-of-ai-infrastructure.html" target="_blank">CNBC</a>, <a href="https://www.geekwire.com/2026/amazon-doubles-down-on-anthropic-with-25b-investment-mirroring-its-openai-cloud-deal/" target="_blank">GeekWire</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="nec-japan-sydney">
+    <div class="dot partner"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge partner-badge">2026 年 4 月 24-27 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>NEC 合作打造日本最大 AI 工程團隊、雪梨辦公室啟用</h3>
+      <div class="description">Anthropic 加速亞太擴張。4/24：與 NEC 簽署戰略合作，共同打造「日本最大 AI 工程人才庫」，提供 Claude 訓練與認證計畫，目標培養數千名能在日本企業內導入 Claude 的工程師。同日發布「Election Safeguards」更新，回應全球選舉年壓力。4/27：任命 Theo Hourmouzis 為澳洲與紐西蘭區 GM，雪梨辦公室正式啟用，標誌亞太區轉為實體據點經營。配合即將到來的 Q4 IPO 計畫，地理佈局有助於提升企業客戶採購信心。</div>
+      <div class="source-link">來源：<a href="https://www.anthropic.com/news" target="_blank">Anthropic 官方</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="creative-work">
+    <div class="dot release"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 4 月 28 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Claude for Creative Work — 攻入 Adobe、Blender、Autodesk、Ableton 創作工具核心</h3>
+      <div class="description">Anthropic 發佈 Claude for Creative Work，與 Blender、Autodesk Fusion、Adobe Creative Cloud、Ableton、Splice、SketchUp、Affinity by Canva、Resolume Arena 同步推出 9 個官方 connector。Claude 可在 Photoshop、Premiere、Express 等 50+ 個 Creative Cloud 工具中直接操作；在 Autodesk Fusion 中以對話建立並修改 3D 模型。教育合作對象包括 Rhode Island School of Design、Ringling College of Art and Design、Goldsmiths（倫敦大學）。創意產業成為繼法律、金融、開發者後第四個直接被 Claude 工作流接管的領域——標誌 Anthropic「橫向整合一切白領」戰略再下一城。</div>
+      <div class="source-link">來源：<a href="https://www.anthropic.com/news/claude-for-creative-work" target="_blank">Anthropic 官方</a>, <a href="https://9to5mac.com/2026/04/28/anthropic-releases-9-new-claude-connectors-for-creative-tools-including-blender-and-adobe/" target="_blank">9to5Mac</a>, <a href="https://blog.adobe.com/en/publish/2026/04/28/adobe-for-creativity-connector" target="_blank">Adobe Blog</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="enterprise-jv">
+    <div class="dot impact"></div>
+    <div class="card" style="border-color: rgba(255,68,68,0.3);">
+      <div class="connector"></div>
+      <div class="date-badge impact-badge">2026 年 5 月 4 日 — 管理顧問業大震盪</div>
+      <h3>Anthropic + Blackstone + H&F + Goldman Sachs $15 億合資 — Accenture 單日跌 6.6%</h3>
+      <div class="description">Anthropic 攜手 Blackstone、Hellman & Friedman、Goldman Sachs 宣布成立新企業 AI 服務公司，三方各承諾 $3 億，總募資約 $15 億。General Atlantic、Leonard Green、Apollo、GIC、Sequoia 跟投。新公司鎖定中型私募旗下企業，將 Anthropic Applied AI 工程師直接嵌入客戶——複製 Palantir Forward-Deployed Engineer 模式，正面切入全球 $3,750 億美元的管理顧問市場。同日 OpenAI 也宣布 $100 億「The Deployment Company」（TPG 領投）。市場將此視為「AI 實驗室直接吃顧問業午餐」訊號：Accenture (ACN) 單日重挫 6.6%、成交量躍升至年度第 50 名活躍水位。投資人擔憂大型 SI（系統整合商）的「人頭計費」模式正被 forward-deployed engineer + AI agent 結構性取代。</div>
+      <div class="source-link">來源：<a href="https://www.anthropic.com/news/enterprise-ai-services-company" target="_blank">Anthropic 官方</a>, <a href="https://www.cnbc.com/2026/05/04/anthropic-goldman-blackstone-ai-venture.html" target="_blank">CNBC</a>, <a href="https://fortune.com/2026/05/04/anthropic-claude-consulting-industry-joint-venture-blackstone-goldman-sachs/" target="_blank">Fortune</a>, <a href="https://www.trefis.com/data/companies/ACN/no-login-required/07bZBZ4B/Accenture-Stock-6-6-AI-Fears-Hit-IT-Services-After-Anthropic-Release" target="_blank">Trefis (ACN)</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="finance-agents">
+    <div class="dot release"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 5 月 5 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Agents for Financial Services — 10 個金融 agent template + Microsoft 365 GA + Moody's 資料整合</h3>
+      <div class="description">在紐約閉門金融服務 briefing 上發表「Agents for Financial Services」——10 個 ready-to-run agent template 直接攻入投行、保險、資產管理、金融科技最耗時的工作流：研究端的 Pitchbuilder（自動 comps + pitchbook draft）、Earnings Reviewer（自動讀電話會議逐字稿並標註模型修訂）、Financial Model Builder；營運端的 GL Reconciler、Month-End Closer、Statement Auditor、KYC Screener（自動聚合受查實體檔案並上報合規）。每個 template 以 plugin 形式同時上架 Cowork、Claude Code 與 Managed Agents cookbook。同步宣布：Claude for Microsoft 365 add-ins（Excel、PowerPoint、Word）GA，Outlook 進入 paid plan public beta；新增 Moody's 資料合作。為前一日的 Blackstone JV 注入產品基底——金融垂直化策略首次以「軟體 + 顧問 + 資料」三位一體形式現身。</div>
+      <div class="source-link">來源：<a href="https://www.anthropic.com/news/finance-agents" target="_blank">Anthropic 官方</a>, <a href="https://www.bloomberg.com/news/articles/2026-05-05/anthropic-unveils-ai-agents-to-field-financial-services-tasks" target="_blank">Bloomberg</a>, <a href="https://fortune.com/2026/05/05/anthropic-wall-street-financial-services-agents-jamie-dimon/" target="_blank">Fortune</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="code-with-claude">
+    <div class="dot release"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 5 月 6 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Code with Claude 2026 大會 — Dreaming、Outcomes、Multiagent Orchestration、SpaceX Colossus 1 算力到位</h3>
+      <div class="description">舊金山開幕的開發者大會無新模型，但推出四項結構性升級：<br><strong>(1) Dreaming</strong>（research preview）—— agent session 之間自動運行的「夢境」程序，回顧上一次工作、抽取 pattern、寫入新記憶條目供下次 session 使用。Harvey pilot 報告任務完成率提升 6 倍。<br><strong>(2) Outcomes</strong>（public beta）—— 自評鞏固迴圈：獨立 evaluator 依書面 rubric 為 agent 輸出打分並指示修正方向。Anthropic 內部 benchmark 顯示任務成功率最多提升 10 分，.docx 提升 8.4%、.pptx 提升 10.1%。<br><strong>(3) Multiagent Orchestration</strong>（public beta）—— lead agent 將任務 fan-out 給並行運行的專家 subagent，共享檔案系統、可在 Claude Console 個別追蹤。<br><strong>(4) Code Review</strong> 正式發布、<strong>Remote Agents</strong> 讓手機操控筆電。<br>同步宣布租用 SpaceXAI（前 xAI）Colossus 1 數據中心——220,000 顆 NVIDIA GPU、300MW 算力，估計每年為 SpaceX 帶來 $30-40 億營收。Claude Code 五小時 rate limit 翻倍、尖峰時段節流全面解除。大會 5/19 移師倫敦、6/10 收官東京。</div>
+      <div class="source-link">來源：<a href="https://simonwillison.net/2026/May/6/code-w-claude-2026/" target="_blank">Simon Willison Live Blog</a>, <a href="https://venturebeat.com/technology/anthropic-introduces-dreaming-a-system-that-lets-ai-agents-learn-from-their-own-mistakes" target="_blank">VentureBeat (Dreaming)</a>, <a href="https://every.to/chain-of-thought/inside-anthropic-s-2026-developer-conference" target="_blank">Every</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="80x-growth">
+    <div class="dot impact"></div>
+    <div class="card" style="border-color: rgba(68,204,136,0.35);">
+      <div class="connector"></div>
+      <div class="date-badge recovery-badge">2026 年 5 月 8 日 — 80 倍年增長</div>
+      <h3>Fortune：Anthropic 季度成長 80 倍、年化收入飆破 $300 億</h3>
+      <div class="description">Fortune 揭露 Anthropic 在 Q1 2026 實現「80 倍年化成長」——遠超公司原本預估的 10 倍。年化收入從 2025 年底的 $90 億跳升至 $300 億（單季三倍）。Dario Amodei 形容「太瘋狂、難以承受」。成長動能來自 Uber、Netflix 等大型企業客戶將 Claude Code 嵌入核心營運。年內企業 $100 萬 ARR 客戶數從 500 翻倍至 1,000+，僅花 2 個月。為消化爆量需求，Anthropic 採取三路平行擴張：Amazon 5GW Trainium、Google + Broadcom 5GW、SpaceX Colossus 1 220K GPU。然而代價是用戶端持續傳出 Claude Code 效能下降與更嚴格限額——Anthropic 承認 3/4 起有三個 bug 影響但延遲處理，部分付費用戶取消訂閱。市場關注：在 IPO 倒數 5 個月前，這份增長數字是否足以支撐 $3,800 億估值上修。</div>
+      <div class="source-link">來源：<a href="https://fortune.com/2026/05/08/anthropic-80fold-growth-quarter-renting-elon-musk-data-center/" target="_blank">Fortune</a>, <a href="https://www.inc.com/ben-sherry/anthropic-and-spacex-just-announced-a-colossal-deal-to-supercharge-claude-ai/91341165" target="_blank">Inc.</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="claude-for-legal">
+    <div class="dot impact"></div>
+    <div class="card" style="border-color: rgba(255,68,68,0.3);">
+      <div class="connector"></div>
+      <div class="date-badge impact-badge">2026 年 5 月 12 日 — Claude for Legal 正式發佈</div>
+      <h3>Claude for Legal — 20+ 法律 MCP 連接器、12 個實務領域 plugin，法律科技再震盪</h3>
+      <div class="description">繼 2 月 3 日「法律科技崩盤日」後，Anthropic 正式推出 Claude for Legal，將垂直化推到極致。四條路徑：<br>(1) <strong>12 個實務 plugin</strong>：Commercial、Employment、Privacy、Product、Corporate、AI Governance。<br>(2) <strong>20+ 個 MCP Connector</strong>：DocuSign、Ironclad、iManage、NetDocuments、LexisNexis、Thomson Reuters、Box、Everlaw、LSuite。<br>(3) <strong>開源生態整合</strong>：Harvey、Legora 等公司貢獻組件。<br>(4) <strong>公益合作</strong>：Free Law Project、Justice Technology Association。<br>關鍵數據：法律已成 Claude Cowork 內第一大 power-user 功能，使用量是第二名的 3 倍以上；4 月法律 webinar 預登人數逾 20,000；Freshfields 部署 6 週內使用量增長約 500%。Harvey CEO Winston Weinberg 表示這「驗證了我們對法律 AI 潛力的長期信念」，但強調 Harvey 專為法律打造的差異化；Thomson Reuters CTO Joel Hron 則稱這是「角色匯流」而非取代，並指出「控制點」仍在於輸出準確度與權威來源錨定。</div>
+      <div class="source-link">來源：<a href="https://www.artificiallawyer.com/2026/05/12/claude-for-legal-launches-may-reshape-the-legal-tech-world/" target="_blank">Artificial Lawyer</a></div>
+    </div>
+  </div>
+
+  <div class="event" id="small-business">
+    <div class="dot release"></div>
+    <div class="card">
+      <div class="connector"></div>
+      <div class="date-badge release-badge">2026 年 5 月 13 日</div><span class="official-badge">Anthropic 官方</span>
+      <h3>Claude for Small Business — 把企業 AI 打包進中小企業日常工具</h3>
+      <div class="description">繼 Legal、Creative Work、Finance Services 後，Anthropic 進一步發布 Claude for Small Business：針對中小企業主預先打包好的 connector 套組與 ready-to-run 工作流，將 Claude 嵌入小型企業日常使用的工具——會計軟體、CRM、電商平台、客服系統。9to5Mac 評論「把 Mac 變成中小企業生產力中樞」。配合前一週的 Blackstone JV 與金融服務 agent，形成「從 SMB 到中型 PE-owned 企業到大型 Fortune 500」三層市場全覆蓋。標誌 Anthropic 從「賣模型」到「賣完整商業 SaaS 替代品」的最終定位轉變——也為 Q4 IPO 故事提供 TAM 擴大論述。</div>
+      <div class="source-link">來源：<a href="https://www.anthropic.com/news/claude-for-small-business" target="_blank">Anthropic 官方</a>, <a href="https://9to5mac.com/2026/05/13/anthropics-latest-claude-release-turns-your-mac-into-a-small-business-powerhouse/" target="_blank">9to5Mac</a></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- =========================================== -->
 <!-- SECTOR SUMMARY -->
 <!-- =========================================== -->
 <div class="phase-label" style="margin-top: 20px;">
   <h2>受衝擊產業總覽</h2>
-  <p>十大產業 / 領域在 2026 年 1-3 月遭受不同程度的「Anthropic 衝擊波」</p>
+  <p>十大產業 / 領域在 2026 年 1-5 月遭受不同程度的「Anthropic 衝擊波」（最新追加：5/4 顧問業、5/12 法律科技、4/7 資安雙向震盪）</p>
 </div>
 
 <div class="sector-grid">
@@ -1859,7 +2025,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-24',81.6],['2026-02-25',83],['2026-02-27',84],
         ['2026-03-01',85.1],['2026-03-05',87.2],['2026-03-08',88.2],['2026-03-12',89.3],
         ['2026-03-15',90],['2026-03-17',90.5],['2026-03-19',91],['2026-03-20',91.2],
-        ['2026-03-24',91.5],['2026-03-26',92],['2026-03-27',91.8]
+        ['2026-03-24',91.5],['2026-03-26',92],['2026-03-27',91.8],
+        ['2026-04-01',92.5],['2026-04-07',93],['2026-04-15',93.5],['2026-04-20',94],['2026-04-28',94.5],
+        ['2026-05-04',94],['2026-05-08',93.5],['2026-05-12',88.5],['2026-05-13',88],['2026-05-14',88.5]
       ]},
       { ticker: 'IBM', name: 'IBM', color: '#5b8def', w: 2.5,
         basePrice: 202, currency: '$', keys: [
@@ -1873,7 +2041,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-23',68.4],['2026-02-24',69.3],['2026-02-25',71.2],['2026-02-27',73.5],
         ['2026-03-01',75.6],['2026-03-05',77.2],['2026-03-08',77.7],['2026-03-12',76.7],
         ['2026-03-15',77.3],['2026-03-17',77.8],['2026-03-19',76.5],['2026-03-20',76.2],
-        ['2026-03-24',76.5],['2026-03-26',77],['2026-03-27',75.5]
+        ['2026-03-24',76.5],['2026-03-26',77],['2026-03-27',75.5],
+        ['2026-04-01',76],['2026-04-15',77.5],['2026-04-20',78.5],['2026-05-04',78],['2026-05-08',78.5],['2026-05-14',78.8]
       ]},
       { ticker: 'LZ', name: 'LegalZoom', color: '#ffd700', w: 1.8,
         basePrice: 7.82, currency: '$', keys: [
@@ -1883,7 +2052,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-03',87],['2026-02-04',84],['2026-02-06',82],['2026-02-10',83],['2026-02-18',81],
         ['2026-02-24',85],['2026-03-01',86],['2026-03-12',88],
         ['2026-03-15',88.5],['2026-03-17',89],['2026-03-19',88.8],['2026-03-20',89],
-        ['2026-03-24',89.5],['2026-03-26',90],['2026-03-27',89.5]
+        ['2026-03-24',89.5],['2026-03-26',90],['2026-03-27',89.5],
+        ['2026-04-01',90.5],['2026-04-15',91.5],['2026-05-01',92],['2026-05-04',91.5],
+        ['2026-05-12',77],['2026-05-13',75.5],['2026-05-14',76]
       ]},
       { ticker: 'RELX', name: 'RELX (LexisNexis)', color: '#e8a0e8', w: 1.8,
         basePrice: 50.93, currency: '$', keys: [
@@ -1893,7 +2064,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-03',88],['2026-02-04',86.5],['2026-02-06',86],['2026-02-14',87],['2026-02-24',90],
         ['2026-03-01',91],['2026-03-12',92],
         ['2026-03-15',92.5],['2026-03-17',93],['2026-03-19',93],['2026-03-20',93.2],
-        ['2026-03-24',93.5],['2026-03-26',94],['2026-03-27',93.5]
+        ['2026-03-24',93.5],['2026-03-26',94],['2026-03-27',93.5],
+        ['2026-04-01',94],['2026-04-15',95],['2026-05-01',96],['2026-05-04',95.5],
+        ['2026-05-12',86],['2026-05-13',85.5],['2026-05-14',86.5]
       ]},
       { ticker: 'CRWD', name: 'CrowdStrike', color: '#00d2d3', w: 1.8,
         basePrice: 394, currency: '$', keys: [
@@ -1903,7 +2076,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-20',98],['2026-02-21',93],['2026-02-23',87],
         ['2026-02-25',89],['2026-03-01',91],['2026-03-12',93],
         ['2026-03-15',94],['2026-03-17',95],['2026-03-19',95.5],['2026-03-20',95.8],
-        ['2026-03-24',96],['2026-03-26',96.5],['2026-03-27',89.7]
+        ['2026-03-24',96],['2026-03-26',96.5],['2026-03-27',89.7],
+        ['2026-04-07',84],['2026-04-08',87],['2026-04-15',91],['2026-04-20',94],
+        ['2026-04-27',99],['2026-05-04',100],['2026-05-08',101.5],['2026-05-14',102.5]
       ]},
       { ticker: 'OKTA', name: 'Okta', color: '#7bed9f', w: 1.5,
         basePrice: 91, currency: '$', keys: [
@@ -1913,7 +2088,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-20',97],['2026-02-21',95],['2026-02-23',93],
         ['2026-02-25',94],['2026-03-01',96],['2026-03-12',97],
         ['2026-03-15',97.5],['2026-03-17',98],['2026-03-19',98.2],['2026-03-20',98.5],
-        ['2026-03-24',99],['2026-03-26',99.5],['2026-03-27',96.5]
+        ['2026-03-24',99],['2026-03-26',99.5],['2026-03-27',96.5],
+        ['2026-04-07',91],['2026-04-15',94],['2026-04-27',98],['2026-05-04',99],['2026-05-14',100]
       ]},
       { ticker: 'SAIL', name: 'SailPoint', color: '#48dbfb', w: 1.5,
         basePrice: 19.25, currency: '$', keys: [
@@ -1922,7 +2098,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-01-15',109],['2026-02-01',107],['2026-02-19',106],
         ['2026-02-20',96],['2026-02-24',97],['2026-03-01',98],['2026-03-12',99],
         ['2026-03-15',99.5],['2026-03-17',83],['2026-03-18',82],['2026-03-19',81.5],['2026-03-20',82],
-        ['2026-03-24',82.5],['2026-03-26',83],['2026-03-27',80]
+        ['2026-03-24',82.5],['2026-03-26',83],['2026-03-27',80],
+        ['2026-04-07',76],['2026-04-15',78],['2026-04-27',81],['2026-05-04',82],['2026-05-14',83]
       ]},
       { ticker: 'COFORGE.NS', name: 'Coforge', color: '#ff6b6b', w: 1.8,
         basePrice: 7898, currency: '₹', keys: [
@@ -1933,7 +2110,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-24',86],['2026-02-28',84.7],
         ['2026-03-05',85],['2026-03-12',86],
         ['2026-03-15',86.5],['2026-03-17',87],['2026-03-18',92.8],['2026-03-19',91.5],['2026-03-20',91],
-        ['2026-03-24',91.5],['2026-03-26',92],['2026-03-27',91.5]
+        ['2026-03-24',91.5],['2026-03-26',92],['2026-03-27',91.5],
+        ['2026-04-01',92],['2026-04-15',93],['2026-05-01',94],['2026-05-14',94.5]
       ]},
       { ticker: 'INFY', name: 'Infosys', color: '#ee5a24', w: 1.8,
         basePrice: 23.00, currency: '$', keys: [
@@ -1944,7 +2122,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-24',85],['2026-02-28',83.2],
         ['2026-03-05',84],['2026-03-12',85],
         ['2026-03-15',85.5],['2026-03-17',86],['2026-03-18',90],['2026-03-19',89],['2026-03-20',88.5],
-        ['2026-03-24',89],['2026-03-26',89.5],['2026-03-27',89]
+        ['2026-03-24',89],['2026-03-26',89.5],['2026-03-27',89],
+        ['2026-04-01',89.5],['2026-04-15',90.5],['2026-05-01',91.5],['2026-05-14',92]
       ]},
       { ticker: '^CNXIT', name: 'Nifty IT Index', color: '#ff9f43', w: 2, dash: [6,3],
         basePrice: 39744, currency: '', suffix: ' pts', keys: [
@@ -1955,7 +2134,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-24',89],['2026-02-28',87.5],
         ['2026-03-05',88],['2026-03-12',89],
         ['2026-03-15',89.5],['2026-03-17',90],['2026-03-18',93.5],['2026-03-19',92.5],['2026-03-20',92],
-        ['2026-03-24',92.5],['2026-03-26',93],['2026-03-27',92.5]
+        ['2026-03-24',92.5],['2026-03-26',93],['2026-03-27',92.5],
+        ['2026-04-01',93],['2026-04-15',94],['2026-05-01',95],['2026-05-14',95.5]
       ]},
       { ticker: 'MSFT', name: 'Microsoft', color: '#a29bfe', w: 1.8,
         basePrice: 439, currency: '$', keys: [
@@ -1965,7 +2145,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-10',94],['2026-02-14',93],['2026-02-18',92],['2026-02-23',90],['2026-02-28',89],
         ['2026-03-05',88.8],['2026-03-09',88.6],['2026-03-12',89],
         ['2026-03-15',88.5],['2026-03-17',88],['2026-03-18',87.5],['2026-03-19',86.8],['2026-03-20',87],
-        ['2026-03-24',87.5],['2026-03-26',87.8],['2026-03-27',87]
+        ['2026-03-24',87.5],['2026-03-26',87.8],['2026-03-27',87],
+        ['2026-04-01',87.5],['2026-04-20',89],['2026-05-05',91],['2026-05-08',92],['2026-05-14',92.5]
       ]},
       { ticker: 'FDS', name: 'FactSet', color: '#ff9ff3', w: 1.5,
         basePrice: 511, currency: '$', keys: [
@@ -1975,7 +2156,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-03',93],['2026-02-04',91.5],['2026-02-06',91],['2026-02-14',92],
         ['2026-02-24',97.5],['2026-03-01',98],['2026-03-12',99],
         ['2026-03-15',99.5],['2026-03-17',100],['2026-03-19',100.2],['2026-03-20',100.5],
-        ['2026-03-24',101],['2026-03-26',101.2],['2026-03-27',100.5]
+        ['2026-03-24',101],['2026-03-26',101.2],['2026-03-27',100.5],
+        ['2026-04-01',100],['2026-04-15',100.5],['2026-05-01',100],
+        ['2026-05-05',92.5],['2026-05-06',91.5],['2026-05-08',92.5],['2026-05-14',93]
       ]},
       { ticker: 'MORN', name: 'Morningstar', color: '#c8d6e5', w: 1.5,
         basePrice: 338, currency: '$', keys: [
@@ -1985,7 +2168,9 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-02-03',94],['2026-02-04',92.5],['2026-02-06',92],['2026-02-14',93],
         ['2026-02-24',95],['2026-03-01',96],['2026-03-12',97],
         ['2026-03-15',97.5],['2026-03-17',98],['2026-03-19',97.8],['2026-03-20',98],
-        ['2026-03-24',98.5],['2026-03-26',98.8],['2026-03-27',98]
+        ['2026-03-24',98.5],['2026-03-26',98.8],['2026-03-27',98],
+        ['2026-04-01',98],['2026-04-15',98.5],['2026-05-01',98],
+        ['2026-05-05',92],['2026-05-08',92.5],['2026-05-14',93]
       ]},
       { ticker: 'PATH', name: 'UiPath', color: '#a3cb38', w: 2,
         basePrice: 13.50, currency: '$', keys: [
@@ -1996,15 +2181,28 @@ document.addEventListener('DOMContentLoaded', () => {
         ['2026-03-05',82],['2026-03-09',81.5],['2026-03-11',83],
         ['2026-03-12',82],['2026-03-15',83.5],['2026-03-17',79],
         ['2026-03-18',81],['2026-03-19',80.5],['2026-03-20',80],
-        ['2026-03-24',80.5],['2026-03-26',81],['2026-03-27',80]
+        ['2026-03-24',80.5],['2026-03-26',81],['2026-03-27',80],
+        ['2026-04-01',80.5],['2026-04-15',81],['2026-05-01',81],
+        ['2026-05-06',75],['2026-05-08',75.5],['2026-05-14',76]
+      ]},
+      { ticker: 'ACN', name: 'Accenture', color: '#fab1a0', w: 1.8,
+        basePrice: 360, currency: '$', keys: [
+        ['2025-01-02',100],['2025-03-01',99],['2025-05-01',97],['2025-07-01',95],
+        ['2025-09-01',93],['2025-11-01',91],['2025-12-31',90],
+        ['2026-01-15',89],['2026-02-01',86],['2026-02-04',82],['2026-02-06',81],
+        ['2026-02-14',82],['2026-02-24',84],['2026-03-01',85],['2026-03-12',86],
+        ['2026-03-15',86.5],['2026-03-17',86],['2026-03-20',86],
+        ['2026-03-24',86.5],['2026-03-26',86.8],['2026-03-27',86.5],
+        ['2026-04-01',86],['2026-04-15',86.5],['2026-04-20',87],['2026-05-01',87],
+        ['2026-05-04',81.3],['2026-05-08',81],['2026-05-14',82]
       ]}
     ];
 
     // Default visible: fewer on mobile for readability
     const isMobile = window.innerWidth < 768;
     const defaultVisible = isMobile
-      ? new Set(['IBM','TRI','CRWD','MSFT','PATH'])
-      : new Set(['IBM','TRI','LZ','CRWD','^CNXIT','MSFT','PATH','SAIL']);
+      ? new Set(['IBM','TRI','CRWD','MSFT','ACN'])
+      : new Set(['IBM','TRI','LZ','CRWD','^CNXIT','MSFT','PATH','SAIL','ACN','FDS']);
 
     // Build datasets with daily-interpolated data
     const datasets = stocks.map((s, i) => ({
@@ -2047,6 +2245,11 @@ document.addEventListener('DOMContentLoaded', () => {
       e14: ev('2026-03-20', 'Claude Code Channels 發佈',   '#f0a060', 0),
       e15: ev('2026-03-26', 'Mythos 洩露 + 禁制令',       '#ff4444', 18),
       e16: ev('2026-03-27', 'Mythos Meltdown 資安閃崩',   '#ff4444', 0),
+      e17: ev('2026-04-07', 'Mythos + Glasswing 正式發表', '#ff4444', 18),
+      e18: ev('2026-04-20', 'Amazon $25B + 5GW 算力擴張',  '#5b8def', 0),
+      e19: ev('2026-05-04', 'Blackstone JV — 顧問業衝擊',  '#ff4444', 18),
+      e20: ev('2026-05-06', 'Code with Claude 大會',       '#f0a060', 0),
+      e21: ev('2026-05-12', 'Claude for Legal 正式發佈',   '#ff4444', 18),
       baseline: {
         type: 'line', yMin: 100, yMax: 100,
         borderColor: '#555', borderWidth: 1, borderDash: [4, 4],
@@ -2078,7 +2281,7 @@ document.addEventListener('DOMContentLoaded', () => {
           x: {
             type: 'time',
             time: { unit: 'month', displayFormats: { month: 'yyyy/MM', week: 'MM/dd' }, tooltipFormat: 'yyyy/MM/dd' },
-            min: '2026-01-01', max: '2026-03-28',
+            min: '2026-01-01', max: '2026-05-15',
             grid: { color: '#1e1e28', drawTicks: false },
             ticks: { color: '#666', font: { size: isMobile ? 9 : 11 }, maxRotation: 0, autoSkip: true, maxTicksLimit: isMobile ? 4 : 30 },
             border: { color: '#333' }
