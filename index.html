@@ -991,6 +991,14 @@ const TYPES={
   gov:{label:'治理・政策',c:'#c084fc'},
 };
 const BADGE={'anthropic-official':'release','release':'release','partner':'partner','impact':'impact','recovery':'recovery'};
+// 自動推導事件類型（漏填或填錯時的後備，與資料產生時的規則一致）
+const etype=e=>{
+  const t=e.titleHtml||'', id=e.id||'', dot=e.dot||'';
+  if(['ipo-update','series-h','80x-growth'].includes(id)||/IPO|Series H|募資|年化收入|估值/.test(t)) return 'fund';
+  if(['pentagon','pentagon-appeal','mythos-glasswing','glasswing-update','pope-encyclical'].includes(id)
+     ||/Pentagon|Anthropic Institute|教宗|通諭|Glasswing|憲政|封殺|聲援|Widening|安全紅線|election/.test(t)) return 'gov';
+  return ({'anthropic-official':'model','release':'model','partner':'partner','impact':'impact','recovery':'impact'})[dot]||'model';
+};
 const fmtDate=iso=>{const[y,m,d]=iso.split('-');return (+m)+'/'+(+d);};
 const monthKey=iso=>{const[y,m]=iso.split('-');return y+' 年 '+(+m)+' 月';};
 let activeFilter='all';
@@ -1016,7 +1024,7 @@ function renderFeed(){
   for(const e of evs){
     const mk=monthKey(e.date);
     if(mk!==lm){h+='<div class="feed-month">'+mk+'</div>';lm=mk;}
-    const t=TYPES[e.type];
+    const t=TYPES[e.type]||TYPES.model;
     h+='<article class="feed-card" style="--tc:'+t.c+'">'
       +'<div class="fc-head"><span class="fc-date">'+fmtDate(e.date)+'</span>'
       +'<span class="fc-tag" style="background:'+t.c+'22;color:'+t.c+'">'+t.label+'</span>'
@@ -1031,22 +1039,26 @@ function renderFeed(){
 }
 const QMAP={'Phase 1':0,'Phase 2':1,'Phase 4':2,'插曲':3};
 function renderStory(){
+  const storyCard=e=>'<div class="event"><div class="dot '+e.dot+'"></div><div class="card"><div class="connector"></div>'
+    +'<div class="date-badge '+(BADGE[e.dot]||'release')+'-badge">'+e.dateLabel+'</div>'
+    +(e.official?'<span class="official-badge">Anthropic 官方</span>':'')
+    +'<h3>'+e.titleHtml+'</h3><div class="description">'+e.desc+'</div>'
+    +'<div class="source-link">來源：'+e.sources.map(s=>'<a href="'+s.url+'" target="_blank">'+s.label+'</a>').join(', ')+'</div>'
+    +'</div></div>';
   let h='<div class="story-intro">完整敘事弧線 — 從 Cowork 引爆到逼近 $1 兆估值（保留原始分期與架構圖）</div>';
   for(const ph of DATA.phases){
     const evs=DATA.events.filter(e=>e.phase===ph.name);
     h+='<div class="phase-label"><h2>'+ph.name+'</h2><p>'+ph.sub+'</p></div>';
-    h+='<div class="timeline-container">';
-    for(const e of evs){
-      h+='<div class="event"><div class="dot '+e.dot+'"></div><div class="card"><div class="connector"></div>'
-        +'<div class="date-badge '+(BADGE[e.dot]||'release')+'-badge">'+e.dateLabel+'</div>'
-        +(e.official?'<span class="official-badge">Anthropic 官方</span>':'')
-        +'<h3>'+e.titleHtml+'</h3><div class="description">'+e.desc+'</div>'
-        +'<div class="source-link">來源：'+e.sources.map(s=>'<a href="'+s.url+'" target="_blank">'+s.label+'</a>').join(', ')+'</div>'
-        +'</div></div>';
-    }
-    h+='</div>';
+    h+='<div class="timeline-container">'+evs.map(storyCard).join('')+'</div>';
     for(const key in QMAP){ if(ph.name.indexOf(key)===0){ h+=QUOTES[QMAP[key]]; } }
     if(ph.name.indexOf('插曲')===0) h+=ARCH;
+  }
+  // 後備：phase 沒對到任何已知階段的事件自動收納，確保不在故事線靜默消失
+  const known=new Set(DATA.phases.map(p=>p.name));
+  const orphans=DATA.events.filter(e=>!known.has(e.phase));
+  if(orphans.length){
+    h+='<div class="phase-label"><h2>其他 / 未分期</h2><p>尚未歸入敘事階段的事件（自動收納，依日期排序）</p></div>';
+    h+='<div class="timeline-container">'+orphans.map(storyCard).join('')+'</div>';
   }
   document.getElementById('panel-story').innerHTML=h;
 }
@@ -1058,6 +1070,9 @@ function showTab(name){
   history.replaceState(null,'','#'+name);
 }
 document.querySelectorAll('.tab-btn').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
+// 載入時自動依日期排序 + 補正類型 → 之後手動新增只需放心 push，順序與類型都不必擔心
+DATA.events.sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
+DATA.events.forEach(e=>{ if(!e.type||!TYPES[e.type]) e.type=etype(e); });
 renderChips(); renderFeed(); renderStory();
 let __stockDrawn=false;
 function drawStockChart(){ if(__stockDrawn) return; __stockDrawn=true;
