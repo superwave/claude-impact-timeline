@@ -618,7 +618,7 @@
     <h1>Anthropic 動態追蹤 <span>Claude Impact Tracker · 2026.01 – 05</span></h1>
     <div class="hdr-meta">
       <span class="chip val">估值 $9,650 億</span>
-      <span class="updated">追蹤 71 則 · 最後更新 2026/05/29</span>
+      <span class="updated">追蹤 <b id="evCount">71</b> 則 · 最後更新 2026/05/29</span>
     </div>
   </div>
   <nav class="tabs">
@@ -1073,6 +1073,7 @@ document.querySelectorAll('.tab-btn').forEach(b=>b.onclick=()=>showTab(b.dataset
 // 載入時自動依日期排序 + 補正類型 → 之後手動新增只需放心 push，順序與類型都不必擔心
 DATA.events.sort((a,b)=>a.date<b.date?-1:a.date>b.date?1:0);
 DATA.events.forEach(e=>{ if(!e.type||!TYPES[e.type]) e.type=etype(e); });
+{ const c=document.getElementById('evCount'); if(c) c.textContent=DATA.events.length; }
 renderChips(); renderFeed(); renderStory();
 let __stockDrawn=false;
 function drawStockChart(){ if(__stockDrawn) return; __stockDrawn=true;
